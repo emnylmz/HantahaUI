@@ -1,12 +1,12 @@
 import React,{ useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function Login({ setToken }) {
+export default function Login() {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
   return(
     <form>
-      <label>
+      {/* <label>
           <p>Username</p>
           <input type="text" onChange={e => setUserName(e.target.value)}/>
         </label>
@@ -16,11 +16,11 @@ export default function Login({ setToken }) {
         </label>
       <div>
         <button type="submit">Submit</button>
-      </div>
+      </div> */}
     </form>
   )
 }
 
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-  }
+// Login.propTypes = {
+//     setToken: PropTypes.func.isRequired
+//   }
