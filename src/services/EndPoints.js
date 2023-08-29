@@ -9,7 +9,7 @@ const END_POINTS = {
   login: createEndpoint('/users/login'), 
   logout: createEndpoint('/logout'), 
   register: createEndpoint('/users/register'),
-  getCountries:createEndpoint() 
+  getAllCountries:createEndpoint('/country/GetAllCountries') 
 };
 
 export { API_BASE_LOCAL_URL,END_POINTS, createEndpoint };

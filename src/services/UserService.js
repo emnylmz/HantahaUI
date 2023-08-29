@@ -1,46 +1,26 @@
-import React from 'react';
 import BaseService from './BaseService';
 
-const API_BASE_URL = 'https://api-url-niz.com'; // Gerçek API URL'nizi kullanın
+class UserService extends BaseService {
 
-function UserService() {
-  const getUsers = () => {
-    return BaseService.get('/kullanicilar');
+  getUser = async (userId) => {
+    try {
+      const response = await this.get(`/users/${userId}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   };
 
-  const kullaniciOlustur = (kullanici) => {
-    return post('/kullanicilar', kullanici);
+  createUser = async (userData) => {
+    try {
+      const response = await this.post('/users', userData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   };
 
-  const kullaniciGuncelle = (kullaniciId, kullanici) => {
-    return put(`/kullanicilar/${kullaniciId}`, kullanici);
-  };
-
-  const kullaniciSil = (kullaniciId) => {
-    return remove(`/kullanicilar/${kullaniciId}`);
-  };
-
-  const get = (endpoint) => {
-    // API isteği gönderme mantığı
-  };
-
-  const post = (endpoint, data) => {
-    // API isteği gönderme mantığı
-  };
-
-  const put = (endpoint, data) => {
-    // API isteği gönderme mantığı
-  };
-
-  const remove = (endpoint) => {
-    // API isteği gönderme mantığı
-  };
-
-  return (
-    <div>
-      {/* Bileşenin JSX içeriği */}
-    </div>
-  );
+  // Diğer UserService özel metodları buraya eklenebilir
 }
 
 export default UserService;
