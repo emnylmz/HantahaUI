@@ -31,7 +31,7 @@ const columns = [
 
 const gridStyle = { minHeight: 550 };
 
-const filterValue = [
+const defaultFilterValue = [
   { name: 'name', operator: 'startsWith', type: 'string', value: '' },
   { name: 'age', operator: 'gte', type: 'number', value: '' }
   // { name: 'city', operator: 'startsWith', type: 'string', value: '' },
@@ -48,7 +48,7 @@ const Users = () => {
   TabTitle('HantahaAdmin | Kullanıcılar');
   return (
     <MainCard>
-      <Table dataSource={dataSource} columns={columns} gridStyle={gridStyle} filterValue={filterValue} />
+      <Table dataSource={dataSource} columns={columns} gridStyle={gridStyle} defaultFilterValue={defaultFilterValue} />
     </MainCard>
   );
 };
