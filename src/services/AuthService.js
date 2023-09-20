@@ -1,25 +1,10 @@
-// import BaseService from './BaseService';
+import { post } from "./BaseService";
 
-// class UserService extends BaseService {
-//   constructor() {
-//     super(API_BASE_URL);
-//   }
+class AuthService {
+  login = async (loginDto) => {
+    const response = await post('/authentication/Login', loginDto);
+    return response.data;
+  };
+}
 
-//   getUsers() {
-//     return this.get('/users');
-//   }
-
-//   createUser(user) {
-//     return this.post('/users', user);
-//   }
-
-//   updateUser(userId, user) {
-//     return this.put(`/users/${userId}`, user);
-//   }
-
-//   deleteUser(userId) {
-//     return this.delete(`/users/${userId}`);
-//   }
-// }
-
-// export default UserService;
+export default AuthService;

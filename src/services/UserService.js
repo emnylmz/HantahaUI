@@ -1,26 +1,10 @@
-import BaseService from './BaseService';
+import { post } from "./BaseService";
 
-class UserService extends BaseService {
-
-  getUser = async (userId) => {
-    try {
-      const response = await this.get(`/users/${userId}`);
-      return response;
-    } catch (error) {
-      throw error;
-    }
+class UserService {
+  register = async (userData) => {
+    const response = await post('/users/register', userData);
+    return response.data;
   };
-
-  createUser = async (userData) => {
-    try {
-      const response = await this.post('/users', userData);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  // Diğer UserService özel metodları buraya eklenebilir
 }
 
 export default UserService;

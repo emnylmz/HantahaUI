@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_LOCAL_URL } from './EndPoints';
+import { API_BASE_TEST_URL } from './EndPoints';
 
 const handleErrorResponse = (error) => {
   if (error.response) {
@@ -22,7 +22,7 @@ const handleErrorResponse = (error) => {
 
 export async function get(endpoint) {
   const api = axios.create({
-    baseURL: API_BASE_LOCAL_URL,
+    baseURL: API_BASE_TEST_URL,
   });
 
   try {
@@ -35,7 +35,7 @@ export async function get(endpoint) {
 
 export async function post(endpoint, data) {
   const api = axios.create({
-    baseURL: API_BASE_LOCAL_URL
+    baseURL: API_BASE_TEST_URL
   });
 
   try {

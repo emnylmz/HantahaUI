@@ -1,18 +1,32 @@
-import "./App.css";
-import React, { useState } from 'react';
-import Router from "./components/Router";
-import Login from "./pages/login/Login";
+import { useSelector } from 'react-redux';
 
-function App() {
-  const [token, setToken] = useState();
-  // if(!token) {
-  //   return <Login setToken={setToken} />
-  // }
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, StyledEngineProvider } from '@mui/material';
+
+// routing
+import Routes from 'routes';
+
+// defaultTheme
+import themes from './components/admin/themes';
+
+// project imports
+import NavigationScroll from 'views/layout/NavigationScroll';
+
+// ==============================|| APP ||============================== //
+
+const App = () => {
+  const customization = useSelector((state) => state.customization);
+
   return (
-    <>
-      <Router />
-    </>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={themes(customization)}>
+        <CssBaseline />
+        <NavigationScroll>
+          <Routes/>
+        </NavigationScroll>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
-}
+};
 
 export default App;
