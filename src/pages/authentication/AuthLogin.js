@@ -55,6 +55,7 @@ const FirebaseLogin = ({ ...others }) => {
 
   let login = async (loginDto) => {
     const authService = new AuthService();
+    debugger;
     var data = await authService
       .login(loginDto)
       .then( async (data) => {
@@ -70,7 +71,7 @@ const FirebaseLogin = ({ ...others }) => {
 
   return (
     <>
-      {navigate ? <Navigate to='/dashboard/default'></Navigate>:<></>}
+      {navigate ? <Navigate to='/home'></Navigate>:<></>}
       <Grid container direction="column" justifyContent="center" spacing={2}>
         <Grid item xs={12}>
           <Box
