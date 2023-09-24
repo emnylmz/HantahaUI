@@ -31,7 +31,7 @@ import AnimateButton from 'components/admin/extended/AnimateButton';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { TabTitle, setTokenCookie } from 'utils/utils';
+import { TabTitle } from 'utils/utils';
 import AuthService from 'services/AuthService';
 import { Navigate } from "react-router-dom";
 
@@ -44,6 +44,7 @@ const FirebaseLogin = ({ ...others }) => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [navigate, setNavigate] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -55,23 +56,18 @@ const FirebaseLogin = ({ ...others }) => {
 
   let login = async (loginDto) => {
     const authService = new AuthService();
-    debugger;
-    var data = await authService
-      .login(loginDto)
-      .then( async (data) => {
-        setTokenCookie(data);
-        setNavigate(true);
-      })
-      .catch((data) => {
-        console.error(data)
-        console.error('Promise Hatası:', data.errors);
-      });
-    return data;
+    var result = await authService.login(loginDto);
+    if (result!=null)
+    {
+      setNavigate(true);
+      setIsAdmin(result.isAdmin)
+    } 
+      
   };
 
   return (
     <>
-      {navigate ? <Navigate to='/home'></Navigate>:<></>}
+      {navigate ? isAdmin? <Navigate to='/adminHome'/>:<Navigate to='/home'/>:<></>}
       <Grid container direction="column" justifyContent="center" spacing={2}>
         <Grid item xs={12}>
           <Box
@@ -105,7 +101,7 @@ const FirebaseLogin = ({ ...others }) => {
             if (scriptedRef.current) {
               setStatus({ success: true });
               setSubmitting(false);
-              login(values);
+              login({email:values.email,password:values.password});
             }
           } catch (err) {
             console.error(err);

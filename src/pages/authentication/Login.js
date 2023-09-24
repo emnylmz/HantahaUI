@@ -11,8 +11,11 @@ import Logo from 'components/admin/Logo';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import MainCard from 'components/admin/cards/MainCard';
+import { clearCookieValue } from 'utils/utils';
 
 const Login = () => {
+  clearCookieValue('hanTaha-auth-token');
+  clearCookieValue('isAdmin');
   const theme = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -51,7 +54,9 @@ const Login = () => {
               <AuthCardWrapper>
                 <Grid container spacing={2} alignItems="center" justifyContent="center">
                   <Grid item sx={{ mb: 2 }}>
+                    <Link to="/home">
                       <Logo />
+                    </Link>
                   </Grid>
                   <Grid item xs={12}>
                     <Grid container direction={matchDownSM ? 'column-reverse' : 'row'} alignItems="center" justifyContent="center">

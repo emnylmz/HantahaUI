@@ -11,11 +11,14 @@ import { store } from 'store';
 
 // style + assets
 import 'assets/scss/style.scss';
+import 'alertifyjs/build/css/alertify.css';
 import config from './config';
+import * as alertify from 'alertifyjs';
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 const container = document.getElementById('root');
+alertify.set('notifier','position', 'bottom-left');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
   <Provider store={store}>

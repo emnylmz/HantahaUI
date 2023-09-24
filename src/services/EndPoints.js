@@ -5,10 +5,16 @@ const createEndpoint = (path) => `${API_BASE_URL}${path}`;
 
 //örnek
 const END_POINTS = {
-  login: createEndpoint('/users/login'), 
-  logout: createEndpoint('/logout'), 
+  //user
+  getAllUsers:createEndpoint('/users/GetAll'),
   register: createEndpoint('/users/register'),
-  getAllCountries:createEndpoint('/country/GetAllCountries') 
+  
+  //authentication
+  login: createEndpoint('/authentication/Login'), 
+  logout: createEndpoint('/authentication/logout'), 
+
+  //country
+  getAllCountries:createEndpoint('/country/GetAllCountries') ,
 };
 
 export { API_BASE_URL,END_POINTS, createEndpoint };

@@ -22,7 +22,7 @@ const MainRoutes = {
     },
     
     {
-      path: 'home',
+      path: '/adminHome',
       children: [
         {
           path: '',

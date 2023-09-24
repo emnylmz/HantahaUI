@@ -15,7 +15,7 @@ import logo from 'assets/images/hantaha-logo.png'
 const Logo = () => {
 
   return (
-     <img src={logo} alt="HanTaha" width="100" />
+     <img src={logo} alt="HanTaha" />
   );
 }
 

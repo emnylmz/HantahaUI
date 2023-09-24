@@ -1,9 +1,11 @@
 import AuthenticationRoutes from './AuthenticationRoutes';
 import { useRoutes } from 'react-router';
 import MainRoutes from './MainRoutes';
+import { getCookie } from 'utils/utils';
 
 export default function ThemeRoutes() {
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  const isAdmin = getCookie('isAdmin') === 'true';
+  console.log(isAdmin)
   let routes = [AuthenticationRoutes];
   if (isAdmin) routes = [...routes, MainRoutes];
   const routeResult = useRoutes(routes);

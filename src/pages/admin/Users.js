@@ -1,7 +1,14 @@
 import Table from 'components/admin/Table';
 import MainCard from '../../components/admin/cards/MainCard';
 import NumberFilter from '@inovua/reactdatagrid-community/NumberFilter';
-import { TabTitle } from 'utils/utils';
+import { TabTitle, getCookie } from 'utils/utils';
+import { useEffect } from 'react';
+import UserService from 'services/UserService';
+
+let getUsers = async () => {
+  const userService = new UserService();
+  return await userService.getAllUsers();
+};
 
 //data source olacak
 const dataSource = [
@@ -45,6 +52,12 @@ const defaultFilterValue = [
 ];
 
 const Users = () => {
+  useEffect(() => {
+    
+    let users = getUsers();
+    console.log(users);
+    console.log(getCookie('isAdmin'));
+  }, []);
   TabTitle('HantahaAdmin | Kullanıcılar');
   return (
     <MainCard>

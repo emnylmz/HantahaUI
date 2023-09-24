@@ -1,9 +1,33 @@
-import { post } from "./BaseService";
+import { setTokenCookie, showMultiLineError, showSuccess } from 'utils/utils';
+import { post } from './BaseService';
+import { END_POINTS } from './EndPoints';
 
 class AuthService {
   login = async (loginDto) => {
-    const response = await post('/authentication/Login', loginDto);
-    return response.data;
+    try {
+      const response = await post(END_POINTS.login, loginDto);
+      setTokenCookie(response.data)
+      showSuccess('Hoşgeldiniz.');
+      return response.data;
+    } catch (response) {
+      if (response.data.errors) {
+        showMultiLineError(response.data.errors);
+      }
+      return null;
+    }
+  };
+
+  logout = async () => {
+    try {
+      const response = await post(END_POINTS.logout);
+      showSuccess('Çıkış yapıldı');
+      return response.data;
+    } catch (response) {
+      if (response.data.errors) {
+        showMultiLineError(response.data.errors);
+      }
+      return null;
+    }
   };
 }
 

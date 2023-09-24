@@ -1,3 +1,5 @@
+import * as alertify from 'alertifyjs';
+
 export const checkVariableNullOrUndefined = (input) => {
    
     if(input===undefined || input===null)
@@ -22,32 +24,36 @@ export const containsRequiredCharacters = (pass) => {
    return passwordRegex.test(pass);
  };
 
+export const showMultiLineError = (errors) => {
+  showError(errors.join('\n'));
+};
 
+export const showError=(message)=>{
+  alertify.error(message);
+}
+
+export const showSuccess=(message)=>{
+  alertify.success(message);
+}
  export const TabTitle = (newTitle) => {
     return document.title=newTitle;
  };
 
- export function checkToken(cookieName) {
-    // Tüm çerezleri alın ve bir dizi haline getirin
-    const cookies = document.cookie.split(';');
-  
-    // Her çerezi kontrol edin
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      // Çerez adını arayın
-      if (cookie.startsWith(cookieName + '=')) {
-        // Çerez bulundu, içeriği alın
-        const cookieValue = cookie.substring(cookieName.length + 1);
-        return decodeURIComponent(cookieValue);
-      }
+ export function getCookie(cookieName) {
+  const name = `${cookieName}=`;
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].trim();
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
     }
-    // Çerez bulunamadı
-    return null;
   }
+  return null;
+}
 
   export function setTokenCookie(values){
     document.cookie = `hanTaha-auth-token=${values.token};`;
-    localStorage.setItem('isAdmin', values.isAdmin);
+    document.cookie = `isAdmin=${values.isAdmin ? 'true' : 'false'};`;
   }
 
   export function clearCookieValue(cookieName) {

@@ -37,6 +37,7 @@ import User1 from 'assets/images/users/user-round.svg';
 
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
+import AuthService from 'services/AuthService';
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -55,8 +56,10 @@ const ProfileSection = () => {
    * */
   const anchorRef = useRef(null);
   const handleLogout = async () => {
-    console.log('Logout');
+    const authService = new AuthService();
+     await authService.logout();
   };
+
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
