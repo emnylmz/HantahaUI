@@ -65,7 +65,6 @@ export default function SignUp() {
   };
 
   const validation = async () => {
-    debugger;
     if (checkVariableNullOrUndefined(formData.firstName) || checkStringVariableEmpty(formData.firstName)) {
       alertify.error('Ad alanı boş bırakılamaz.');
       return;

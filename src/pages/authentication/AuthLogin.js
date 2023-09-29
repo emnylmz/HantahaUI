@@ -45,6 +45,7 @@ const FirebaseLogin = ({ ...others }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [navigate, setNavigate] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -56,13 +57,14 @@ const FirebaseLogin = ({ ...others }) => {
 
   let login = async (loginDto) => {
     const authService = new AuthService();
+    setLoading(true);
     var result = await authService.login(loginDto);
     if (result!=null)
     {
       setNavigate(true);
       setIsAdmin(result.isAdmin)
     } 
-      
+    setLoading(false);  
   };
 
   return (
@@ -100,11 +102,9 @@ const FirebaseLogin = ({ ...others }) => {
           try {
             if (scriptedRef.current) {
               setStatus({ success: true });
-              setSubmitting(false);
               login({email:values.email,password:values.password});
             }
           } catch (err) {
-            console.error(err);
             if (scriptedRef.current) {
               setStatus({ success: false });
               setErrors({ submit: err.message });
@@ -113,7 +113,7 @@ const FirebaseLogin = ({ ...others }) => {
           }
         }}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+        {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
           <form noValidate onSubmit={handleSubmit} {...others}>
             <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
               <InputLabel htmlFor="outlined-adornment-email-login">E-posta</InputLabel>
@@ -184,7 +184,7 @@ const FirebaseLogin = ({ ...others }) => {
 
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="secondary">
+                <Button disableElevation disabled={loading} fullWidth size="large" type="submit" variant="contained" color="secondary">
                   Giriş Yap
                 </Button>
               </AnimateButton>

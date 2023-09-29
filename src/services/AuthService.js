@@ -1,4 +1,4 @@
-import { setTokenCookie, showMultiLineError, showSuccess } from 'utils/utils';
+import { clearCookies, setTokenCookie, showMultiLineError, showSuccess } from 'utils/utils';
 import { post } from './BaseService';
 import { END_POINTS } from './EndPoints';
 
@@ -6,7 +6,7 @@ class AuthService {
   login = async (loginDto) => {
     try {
       const response = await post(END_POINTS.login, loginDto);
-      setTokenCookie(response.data)
+      setTokenCookie(response.data);
       showSuccess('Hoşgeldiniz.');
       return response.data;
     } catch (response) {
@@ -20,6 +20,7 @@ class AuthService {
   logout = async () => {
     try {
       const response = await post(END_POINTS.logout);
+      clearCookies();
       showSuccess('Çıkış yapıldı');
       return response.data;
     } catch (response) {

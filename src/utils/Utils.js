@@ -54,10 +54,26 @@ export const showSuccess=(message)=>{
   export function setTokenCookie(values){
     document.cookie = `hanTaha-auth-token=${values.token};`;
     document.cookie = `isAdmin=${values.isAdmin ? 'true' : 'false'};`;
+    document.cookie = `fullname=${values.fullname};`;
+    document.cookie = `username=${values.username};`;
+    document.cookie = `email=${values.email};`;
   }
 
   export function clearCookieValue(cookieName) {
     document.cookie = `${cookieName}=; path=/;`;
+  }
+
+  export function clearCookies(){
+    clearCookieValue('hanTaha-auth-token');
+    clearCookieValue('isAdmin');
+  }
+
+  export function setLocalStorageItem(key,value){
+    localStorage.setItem(key, value);
+  }
+
+  export function getLocalStorageItem(key){
+    localStorage.getItem(key);
   }
   
   

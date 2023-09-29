@@ -11,11 +11,13 @@ import NotificationSection from './NotificationSection';
 
 // assets
 import { IconMenu2 } from '@tabler/icons';
+import { TabTitle } from 'utils/utils';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 const Header = ({ handleLeftDrawerToggle }) => {
   const theme = useTheme();
+  TabTitle('HantahaAdmin | Anasayfa')
 
   return (
     <>

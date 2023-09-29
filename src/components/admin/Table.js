@@ -15,6 +15,7 @@ function Table(props) {
       dataSource={props.dataSource}
       style={props.gridStyle}
       pagination
+      enableSelection
       defaultFilterValue={props.defaultFilterValue}
     />
   )

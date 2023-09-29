@@ -11,6 +11,14 @@
 
 .alertify-notifier .ajs-message.ajs-error{
   color: white;
+  border: solid 2px #ddd;
+  border-color: #333333 ;
+}
+
+.alertify-notifier .ajs-message.ajs-success{
+  color: white;
+  border: solid 2px #ddd;
+  border-color: #333333 ;
 }
 
 // ==============================|| APEXCHART ||============================== //

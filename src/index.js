@@ -10,13 +10,15 @@ import App from 'App';
 import { store } from 'store';
 
 // style + assets
-import 'assets/scss/style.scss';
 import 'alertifyjs/build/css/alertify.css';
+import 'assets/scss/style.scss';
 import config from './config';
 import * as alertify from 'alertifyjs';
+import moment from 'moment/moment';
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
+window.moment = moment;
 const container = document.getElementById('root');
 alertify.set('notifier','position', 'bottom-left');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
