@@ -9,18 +9,6 @@
   z-index: 1200;
 }
 
-.alertify-notifier .ajs-message.ajs-error{
-  color: white;
-  border: solid 2px #ddd;
-  border-color: #333333 ;
-}
-
-.alertify-notifier .ajs-message.ajs-success{
-  color: white;
-  border: solid 2px #ddd;
-  border-color: #333333 ;
-}
-
 // ==============================|| APEXCHART ||============================== //
 
 .apexcharts-legend-series .apexcharts-legend-marker {
@@ -137,4 +125,90 @@
   75% {
     transform: translateX(10px);
   }
+}
+
+// ==============================|| ALERTIFY JS ||============================== //
+
+.alertify-notifier .ajs-message.ajs-error{
+  color: white;
+  border: solid 2px #ddd;
+  border-color: #333333 ;
+}
+
+.alertify-notifier .ajs-message.ajs-success{
+  color: white;
+  border: solid 2px #ddd;
+  border-color: #333333 ;
+}
+
+.alertify .ajs-header {
+  color: black;
+  font-weight: bold;
+  background: #fafafa;
+  border-bottom: #eee 1px solid;
+  border-radius: 2px 2px 0 0;
+}
+
+.alertify .ajs-footer .ajs-buttons.ajs-primary {
+  text-align: right;
+}
+
+.alertify .ajs-body .ajs-content {
+  padding: 16px 24px 16px 16px;
+}
+
+.alertify .ajs-body {
+  color: black;
+}
+
+.alertify .ajs-dialog {
+  position: relative;
+  margin: 5% auto;
+  min-height: 110px;
+  max-width: 500px;
+  padding: 24px 24px 0 24px;
+  outline: 0;
+  background-color: #fff;
+}
+
+.alertify .ajs-dialog {
+  background-color: white;
+  -webkit-box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+
+.alertify .ajs-footer {
+  background: #fbfbfb;
+  border-top: #eee 1px solid;
+  border-radius: 0 0 2px 2px;
+}
+
+.alertify .ajs-footer {
+  padding: 4px;
+  margin-left: -24px;
+  margin-right: -24px;
+  min-height: 43px;
+  background-color: #fff;
+}
+
+.alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
+  color: #3593D2;
+}
+.alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button {
+  margin: 4px;
+}
+
+.alertify .ajs-footer .ajs-buttons .ajs-button {
+  background-color: transparent;
+  color: #000;
+  border: 0;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.alertify .ajs-footer .ajs-buttons .ajs-button {
+  min-width: 88px;
+  min-height: 35px;
 }

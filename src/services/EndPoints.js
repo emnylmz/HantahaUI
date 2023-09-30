@@ -8,6 +8,7 @@ const END_POINTS = {
   //user
   getAllUsers:createEndpoint('/users/GetAll'),
   register: createEndpoint('/users/register'),
+  updateUser: createEndpoint('/users/update'),
   
   //authentication
   login: createEndpoint('/authentication/Login'), 

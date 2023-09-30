@@ -7,6 +7,7 @@ import Loadable from 'components/admin/Loadable';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const Users = Loadable(lazy(() => import('pages/admin/Users')));
+const Languages = Loadable(lazy(() => import('pages/admin/Languages')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -36,6 +37,15 @@ const MainRoutes = {
         {
           path: '',
           element: <Users />
+        }
+      ]
+    },
+    {
+      path: 'languages',
+      children: [
+        {
+          path: '',
+          element: <Languages />
         }
       ]
     },

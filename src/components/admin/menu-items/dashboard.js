@@ -1,8 +1,8 @@
 // assets
-import { IconUsers,IconUser } from '@tabler/icons';
+import { IconUsers,IconUser,IconLanguage } from '@tabler/icons';
 
 // constant
-const icons = { IconUsers,IconUser };
+const icons = { IconUsers,IconUser,IconLanguage };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -20,7 +20,7 @@ const dashboard = {
 
       children: [
         {
-          id: 'user',
+          id: 'users',
           title: 'Kullanıcılar',
           type: 'item',
           url: 'users',
@@ -36,8 +36,17 @@ const dashboard = {
         //   target: true
         // }
       ]
-    }
-  ]
+    },
+    {
+      id: 'languages',
+      title: 'Diller',
+      type: 'item',
+      url: 'languages',
+      icon:icons.IconLanguage,
+      target: true
+      
+    },
+  ],
 };
 
 export default dashboard;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_BASE_URL } from './EndPoints';
-import { getCookie } from 'utils/utils';
+import {getCookie, logOutErrorCodes, logOutTransactions, showAlert } from 'utils/utils';
 
 const handleErrorResponse = (error) => {
   if (error.response) {
@@ -34,6 +34,12 @@ export async function get(endpoint) {
     const response = await api.get(endpoint);
     return response.data.data;
   } catch (error) {
+    console.log(error.response.status)
+    if(logOutErrorCodes.includes(error.response.status))
+      logOutTransactions();
+    else if(error.response.status===500)
+    showAlert("Hata","Sorun sizde değil bizde. Sorun ile en yakın zamanda ilgileneceğiz.")
+      
     throw handleErrorResponse(error);
   }
 }

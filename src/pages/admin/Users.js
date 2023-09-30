@@ -16,30 +16,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Checkbox from '@mui/material/Checkbox';
+import BackDrop from 'components/BackDrop';
 
-
-
-
-// //data source olacak
-// const dataSource = [
-//   { id: 1, name: 'John McQueen', age: 35 },
-//   { id: 2, name: 'Mary Stones', age: 25 },
-//   { id: 3, name: 'Robert Fil', age: 27 },
-//   { id: 4, name: 'Roger Robson', age: 81 },
-//   { id: 5, name: 'Billary Konwik', age: 18 },
-//   { id: 6, name: 'Bob Martin', age: 18 },
-//   { id: 7, name: 'Matthew Richardson', age: 54 },
-//   { id: 8, name: 'Ritchie Peterson', age: 54 },
-//   { id: 9, name: 'Bryan Martin', age: 40 },
-//   { id: 10, name: 'Mark Martin', age: 44 },
-//   { id: 11, name: 'Michelle Sebastian', age: 24 },
-//   { id: 12, name: 'Michelle Sullivan', age: 61 },
-//   { id: 13, name: 'Jordan Bike', age: 16 },
-//   { id: 14, name: 'Nelson Ford', age: 34 },
-//   { id: 15, name: 'Tim Cheap', age: 3 },
-//   { id: 16, name: 'Robert Carlson', age: 31 },
-//   { id: 17, name: 'Johny Perterson', age: 40 }
-// ];
+const userService = new UserService();
 
 const Users = () => {
   const columns = [
@@ -126,15 +105,6 @@ const Users = () => {
     //     }),
     //   }
     // }
-    // { name: 'age', operator: 'gte', type:  'number', value: '' }
-    // { name: 'city', operator: 'startsWith', type: 'string', value: '' },
-    // {
-    //   name: 'birthDate',
-    //   operator: 'before',
-    //   type: 'date',
-    //   value: ''
-    // },
-    // { name: 'country', operator: 'eq', type: 'select', value: 'ca' }
   ];
 
   const [users, setUsers] = useState([]);
@@ -145,7 +115,15 @@ const Users = () => {
   const handleClose = () =>{setOpen(false); setUser({})} 
 
   const handleSubmit=async()=>{
-    console.log(user);
+    setLoading(true);
+    const userData={
+      Id:user.id,
+      IsActive:user.isActive,
+      IsAdmin:user.isAdmin
+    }
+    const result=await userService.updateUser(userData);
+    if(result) await getUsers();
+    setLoading(false);
     setOpen(false);
   }
 
@@ -156,19 +134,18 @@ const Users = () => {
 
   let getUsers = async () => {
     setLoading(true);
-    const userService = new UserService();
     let users = await userService.getAllUsers();
-    setLoading(false);
     setUsers(users);
+    setLoading(false);
   };
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [loading]);
   TabTitle('HantahaAdmin | Kullanıcılar');
   return (
     <MainCard>
-      <Button onClick={handleOpen}>Düzenle</Button>
+      <BackDrop loading={loading}/>
       <Dialog fullWidth maxWidth='sm'  onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           {user.fullname}
