@@ -1,24 +1,52 @@
-import React from 'react'
+import React from 'react';
 import '@inovua/reactdatagrid-community/index.css';
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { i18n } from 'components/Tablei18n';
+import { useState } from 'react';
+import BackDrop from 'components/BackDrop';
+import { useEffect } from 'react';
+
 // import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter'
 // import DateFilter from '@inovua/reactdatagrid-community/DateFilter'
 
 function Table(props) {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(true);
+    if (props.dataSource && props.dataSource.length > 0) {
+      setLoading(false); // Veriler yüklendiğinde loading durumunu kapatın
+    }
+  }, [props.dataSource]);
+  
+  const emptyText = (
+    <b
+      style={{
+        padding: 8,
+        border: '1px solid #7986cb',
+        color: '#ef9a9a',
+        borderRadius: 4
+      }}
+    >
+      Listelenecek veri bulunamadı !!!
+    </b>
+  );
 
   return (
-    <ReactDataGrid
-      idProperty="id"
-      columns={props.columns}
-      i18n={i18n}
-      dataSource={props.dataSource}
-      style={props.gridStyle}
-      pagination
-      enableSelection
-      defaultFilterValue={props.defaultFilterValue}
-    />
-  )
+    <>
+      <BackDrop loading={loading} />
+      {!loading ?<ReactDataGrid
+        idProperty="id"
+        columns={props.columns}
+        i18n={i18n}
+        emptyText={emptyText}
+        dataSource={props.dataSource || []}
+        style={props.gridStyle}
+        pagination
+        enableSelection
+        defaultFilterValue={props.defaultFilterValue}
+      />:<></>}
+    </>
+  );
 }
 
-export default Table
+export default Table;

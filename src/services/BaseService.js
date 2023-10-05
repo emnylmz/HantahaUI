@@ -34,7 +34,6 @@ export async function get(endpoint) {
     const response = await api.get(endpoint);
     return response.data.data;
   } catch (error) {
-    console.log(error.response.status)
     if(logOutErrorCodes.includes(error.response.status))
       logOutTransactions();
     else if(error.response.status===500)

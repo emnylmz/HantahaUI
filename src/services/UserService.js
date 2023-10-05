@@ -29,7 +29,6 @@ class UserService {
         return true;
       }
     } catch (response) {
-      console.log(response)
       if (response.data.errors) showMultiLineError(response.data.errors);
       return false;
     }

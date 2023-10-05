@@ -28,7 +28,7 @@ const Users = () => {
       defaultFlex: 0.2,
       render: ({ value }) => {
         return (
-          <IconButton aria-label="delete" size="small" onClick={() => handleClick(value)}>
+          <IconButton aria-label="edit" size="small" onClick={() => handleClick(value)}>
             <EditIcon fontSize="inherit" />
           </IconButton>
         );
@@ -89,22 +89,6 @@ const Users = () => {
     { name: 'email', operator: 'startsWith', type: 'string', value: '' },
     { name: 'lastLoginDate', operator: 'after', type: 'date', value: '' },
     { name: 'createdOn', operator: 'after', type: 'date', value: '' }
-    // { name: 'isActive', operator: 'eq', type: 'bool',value:null },
-
-    // {
-    //   name: 'isActive',
-    //   defaultFlex: 1,
-    //   minWidth: 50,
-    //   header: 'Aktif',
-    //   filterEditor: SelectFilter,
-    //   filterEditorProps: {
-    //     multiple: true,
-    //     wrapMultiple: false,
-    //     dataSource: ['Aktif', 'Pasif'].map(c => {
-    //       return { id: c, label: c}
-    //     }),
-    //   }
-    // }
   ];
 
   const [users, setUsers] = useState([]);

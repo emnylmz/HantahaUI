@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import CountryService from "../../services/CountryService";
 
 import { Popper } from "@mui/material";
 import { checkVariableNullOrUndefined } from "../../utils/utils";
@@ -18,33 +17,28 @@ export default function CountrySelect(props) {
       />
     );
   };
-
   const { setCountryId,error } = props;
-  const [countries, setCountries] = useState([]);
-
-  let getAllCountries = async () => {
-    const countryService = new CountryService();
-    var data = await countryService.getAllCountries();
-    return data;
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedCountries = await getAllCountries();
-      setCountries(fetchedCountries);
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <Autocomplete
+      // isOptionEqualToValue={(option, value) => option.id == value.countryId}
       id="country-select"
       name="country"
-      options={countries}
+      options={props.countries}
+      multiple={props.multiple==undefined ?false:true}
+      defaultValue={props.countryIds ===undefined ?[]:props.countryIds}
       onChange={(event, newValue) => {
-        if (checkVariableNullOrUndefined(newValue)) setCountryId("");
-        else setCountryId(newValue.id);
+        if(props.multiple==undefined)
+        {
+          if (checkVariableNullOrUndefined(newValue)) setCountryId("");
+          else setCountryId(newValue.id);
+        }
+        else
+        {
+          if(newValue.length==0) setCountryId([]);
+          else setCountryId(newValue.map(item => item.id));
+        }
+        
       }}
       PopperComponent={PopperMy}
       ListboxProps={{ style: { maxHeight: 150 } }}
@@ -75,7 +69,7 @@ export default function CountrySelect(props) {
           label="Ülke Seçiniz *"
           inputProps={{
             ...params.inputProps,
-            autoComplete: "new-password", // disable autocomplete and autofill
+            autoComplete: "new-password",
           }}
         />
       )}

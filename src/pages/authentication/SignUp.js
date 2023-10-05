@@ -34,6 +34,7 @@ import {
   validateEmail
 } from '../../utils/utils';
 import UserService from 'services/UserService';
+import CountryService from 'services/CountryService';
 
 const defaultTheme = createTheme();
 
@@ -139,7 +140,22 @@ export default function SignUp() {
     return await userService.register(userData);
   };
 
-  useEffect(() => {}, []);
+  const [countries, setCountries] = useState([]);
+
+  let getAllCountries = async () => {
+    const countryService = new CountryService();
+    var data = await countryService.getAllCountries();
+    return data;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedCountries = await getAllCountries();
+      setCountries(fetchedCountries);
+    };
+
+    fetchData();
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -313,6 +329,7 @@ export default function SignUp() {
                 </Grid>
                 <Grid item xs={12}>
                   <CountrySelect
+                    countries={countries}
                     setCountryId={(e) => {
                       setFormData((prevData) => ({
                         ...prevData,

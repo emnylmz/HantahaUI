@@ -38,10 +38,10 @@ const dashboard = {
       ]
     },
     {
-      id: 'languages',
+      id: 'language',
       title: 'Diller',
       type: 'item',
-      url: 'languages',
+      url: 'language',
       icon:icons.IconLanguage,
       target: true
       

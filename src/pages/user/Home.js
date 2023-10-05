@@ -1,12 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { TabTitle, getCookie } from 'utils/utils';
+import { TabTitle } from 'utils/utils';
 
 export default function Home() {
   useEffect(() => {
     TabTitle("Han Taha")
-    console.log(getCookie('email'));
-    console.log(getCookie('username'));
     
   }, []);
 
