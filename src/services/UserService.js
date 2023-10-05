@@ -1,4 +1,4 @@
-import { showMultiLineError, showSuccess } from 'utils/utils';
+import { showMultiLineError, showSuccess } from 'utils/Utils';
 import { post, get } from './BaseService';
 import { END_POINTS } from './EndPoints';
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_BASE_URL } from './EndPoints';
-import {getCookie, logOutErrorCodes, logOutTransactions, showAlert } from 'utils/utils';
+import {getCookie, logOutErrorCodes, logOutTransactions, showAlert } from 'utils/Utils';
 
 const handleErrorResponse = (error) => {
   if (error.response) {

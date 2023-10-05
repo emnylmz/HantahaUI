@@ -32,7 +32,7 @@ import {
   checkVariableNullOrUndefined,
   containsRequiredCharacters,
   validateEmail
-} from '../../utils/utils';
+} from '../../utils/Utils';
 import UserService from 'services/UserService';
 import CountryService from 'services/CountryService';
 

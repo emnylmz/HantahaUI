@@ -1,6 +1,6 @@
 import Table from 'components/admin/Table';
 import MainCard from '../../components/admin/cards/MainCard';
-import { TabTitle } from 'utils/utils';
+import { TabTitle } from 'utils/Utils';
 import { useEffect } from 'react';
 import DateFilter from '@inovua/reactdatagrid-community/DateFilter';
 import { Button, Typography, FormControlLabel, TextField } from '@mui/material';

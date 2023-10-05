@@ -1,7 +1,7 @@
 import AuthenticationRoutes from './AuthenticationRoutes';
 import { useRoutes } from 'react-router';
 import MainRoutes from './MainRoutes';
-import { getCookie } from 'utils/utils';
+import { getCookie } from 'utils/Utils';
 
 export default function ThemeRoutes() {
   const isAdmin = getCookie('isAdmin') === 'true';

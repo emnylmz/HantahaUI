@@ -1,4 +1,4 @@
-import { clearCookies, setTokenCookie, showMultiLineError, showSuccess } from 'utils/utils';
+import { clearCookies, setTokenCookie, showMultiLineError, showSuccess } from 'utils/Utils';
 import { post } from './BaseService';
 import { END_POINTS } from './EndPoints';
 

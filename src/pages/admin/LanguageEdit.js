@@ -1,6 +1,6 @@
 import MainCard from 'components/admin/cards/MainCard';
 import React from 'react';
-import { TabTitle } from 'utils/utils';
+import { TabTitle } from 'utils/Utils';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import LanguageService from 'services/LanguageService';

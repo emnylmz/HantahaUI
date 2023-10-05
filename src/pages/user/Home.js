@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { TabTitle } from 'utils/utils';
+import { TabTitle } from 'utils/Utils';
 
 export default function Home() {
   useEffect(() => {
