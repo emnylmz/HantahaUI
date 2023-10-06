@@ -1,7 +1,7 @@
 import Table from 'components/admin/Table';
 import MainCard from '../../components/admin/cards/MainCard';
 // import NumberFilter from '@inovua/reactdatagrid-community/NumberFilter';
-import { TabTitle } from 'utils/Utils';
+import { TabTitle } from 'utils/utils';
 import { useEffect } from 'react';
 import UserService from 'services/UserService';
 // import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter'

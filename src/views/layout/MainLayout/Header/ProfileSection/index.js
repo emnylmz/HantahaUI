@@ -32,7 +32,7 @@ import User1 from 'assets/images/users/user-round.svg';
 // assets
 import { IconLogout, IconSettings } from '@tabler/icons';
 import AuthService from 'services/AuthService';
-import { getCookie } from 'utils/Utils';
+import { getCookie } from 'utils/utils';
 
 // ==============================|| PROFILE MENU ||============================== //
 

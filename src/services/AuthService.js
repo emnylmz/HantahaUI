@@ -1,4 +1,4 @@
-import { clearCookies, setTokenCookie, showMultiLineError, showSuccess } from 'utils/Utils';
+import { clearCookies, setTokenCookie, showMultiLineError, showSuccess } from 'utils/utils';
 import { post } from './BaseService';
 import { END_POINTS } from './EndPoints';
 
@@ -10,7 +10,7 @@ class AuthService {
       showSuccess('Hoşgeldiniz.');
       return response.data;
     } catch (response) {
-      if (response.data.errors) {
+      if (response.data && response.data.errors) {
         showMultiLineError(response.data.errors);
       }
       return null;

@@ -31,7 +31,7 @@ import AnimateButton from 'components/admin/extended/AnimateButton';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { TabTitle } from 'utils/Utils';
+import { TabTitle } from 'utils/utils';
 import AuthService from 'services/AuthService';
 import { Navigate } from "react-router-dom";
 

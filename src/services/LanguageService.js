@@ -1,4 +1,4 @@
-import { showMultiLineError, showSuccess } from 'utils/Utils';
+import { showMultiLineError, showSuccess } from 'utils/utils';
 import { get,post } from './BaseService';
 import { END_POINTS } from './EndPoints';
 class LanguageService {
@@ -9,12 +9,13 @@ class LanguageService {
 
   createOrUpdateLanguage = async (languageData) => {
     try {
+      debugger;
       const response = await post(END_POINTS.createOrUpdateLanguage, languageData);
-      if (response.data.errors) 
+      if (response.data && response.data.errors) 
         showMultiLineError(response.data.errors);
       else 
       {
-        showSuccess('Kayıt başarıyla oluşturuldu.');
+        showSuccess(languageData.id===0?'Kayıt başarıyla oluşturuldu.':'Kayıt başarıyla güncellendi.');
 
       }
       
@@ -27,7 +28,7 @@ class LanguageService {
     try {
       
       const response = await post(END_POINTS.removeLanguage, {Id:languageId});
-      if (response.data.errors) 
+      if (response.data && response.data.errors) 
         showMultiLineError(response.data.errors);
       else 
         showSuccess('Kayıt başarıyla silindi.');

@@ -11,7 +11,7 @@ import NotificationSection from './NotificationSection';
 
 // assets
 import { IconMenu2 } from '@tabler/icons';
-import { TabTitle } from 'utils/Utils';
+import { TabTitle } from 'utils/utils';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 

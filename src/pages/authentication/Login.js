@@ -11,7 +11,7 @@ import Logo from 'components/admin/Logo';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import MainCard from 'components/admin/cards/MainCard';
-import { clearCookieValue } from 'utils/Utils';
+import { clearCookieValue } from 'utils/utils';
 
 const Login = () => {
   clearCookieValue('hanTaha-auth-token');

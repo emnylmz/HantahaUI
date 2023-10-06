@@ -1,6 +1,6 @@
 import Table from 'components/admin/Table';
 import MainCard from '../../components/admin/cards/MainCard';
-import { TabTitle } from 'utils/Utils';
+import { TabTitle } from 'utils/utils';
 import { useEffect } from 'react';
 import DateFilter from '@inovua/reactdatagrid-community/DateFilter';
 import { Button, FormControlLabel, TextField, Grid } from '@mui/material';
@@ -121,7 +121,7 @@ const Language = () => {
       Id: language.id,
       IsActive: language.isActive,
       Name: language.name,
-      LanguageCountries:language.languageCountries
+      LanguageCountries:language.languageCountries.map(x=>x.id)
     };
     const result = await languageService.createOrUpdateLanguage(languageData);
     if (result) await getLanguageList();
