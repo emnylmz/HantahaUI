@@ -125,7 +125,7 @@ const Users = () => {
 
   useEffect(() => {
     getUsers();
-  }, [loading]);
+  }, []);
   TabTitle('HantahaAdmin | Kullanıcılar');
   return (
     <MainCard>

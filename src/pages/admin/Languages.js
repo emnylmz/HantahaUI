@@ -3,7 +3,7 @@ import MainCard from '../../components/admin/cards/MainCard';
 import { TabTitle } from 'utils/Utils';
 import { useEffect } from 'react';
 import DateFilter from '@inovua/reactdatagrid-community/DateFilter';
-import { Button, Typography, FormControlLabel, TextField } from '@mui/material';
+import { Button, FormControlLabel, TextField, Grid } from '@mui/material';
 import { IconButton, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -23,6 +23,7 @@ import alertify from 'alertifyjs';
 import { useCallback } from 'react';
 import CountryService from 'services/CountryService';
 import CountrySelect from 'components/admin/CountrySelect';
+
 
 const languageService = new LanguageService();
 const countryService = new CountryService();
@@ -116,7 +117,6 @@ const Language = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    console.log(language.languageCountries)
     const languageData = {
       Id: language.id,
       IsActive: language.isActive,
@@ -138,7 +138,9 @@ const Language = () => {
     const language=languages.find((x) => x.id === id);
     alertify.confirm(language.name, language.name+' adlı kayıdı silmek istediğinizden emin misiniz?', 
     async function(){ 
+      
       await languageService.removeLanguage(id);
+      getLanguageList();
     }, function(){ }).set('labels', {ok:'Sil', cancel:'İptal'});
   };
 
@@ -159,7 +161,7 @@ const Language = () => {
   return (
     <MainCard>
       <BackDrop loading={loading} />
-      <Tooltip title="Dil Ekle">
+      <Tooltip title="Dil Güncelle/Ekle">
         <IconButton onClick={() => setOpen(true)} color="primary" aria-label="add şanguage">
           <AddCircleIcon fontSize="medium" />
         </IconButton>
@@ -181,7 +183,6 @@ const Language = () => {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-          <Typography gutterBottom>
             <TextField
               style={{ marginBottom: '10px' }}
               required
@@ -198,7 +199,7 @@ const Language = () => {
               }}
               label="Dil adı"
             />
-            <FormControlLabel
+          <FormControlLabel
               control={
                 <Checkbox
                   checked={language.isActive}
@@ -213,7 +214,9 @@ const Language = () => {
               }
               label="Aktif mi?"
             />
-             <CountrySelect
+            <Grid item xs={12}>
+
+            <CountrySelect
                     countryIds={language.languageCountries}
                     multiple={true}
                     countries={countries}
@@ -224,11 +227,12 @@ const Language = () => {
                       }));
                     }}
                   />
-          </Typography>
+            </Grid>
+             
         </DialogContent>
         <DialogActions>
           <Button disabled={loading} variant="contained" autoFocus onClick={handleSubmit}>
-            Ekle
+            Kaydet
           </Button>
         </DialogActions>
       </Dialog>

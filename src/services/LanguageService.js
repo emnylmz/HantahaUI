@@ -1,3 +1,4 @@
+import { showMultiLineError, showSuccess } from 'utils/Utils';
 import { get,post } from './BaseService';
 import { END_POINTS } from './EndPoints';
 class LanguageService {
@@ -12,7 +13,10 @@ class LanguageService {
       if (response.data.errors) 
         showMultiLineError(response.data.errors);
       else 
+      {
         showSuccess('Kayıt başarıyla oluşturuldu.');
+
+      }
       
     } catch (response) {
       if (response.data && response.data.errors) showMultiLineError(response.data.errors);

@@ -13,8 +13,8 @@ function Table(props) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(true);
-    if (props.dataSource && props.dataSource.length > 0) {
-      setLoading(false); // Veriler yüklendiğinde loading durumunu kapatın
+    if (props.dataSource) {
+      setLoading(false);
     }
   }, [props.dataSource]);
   
