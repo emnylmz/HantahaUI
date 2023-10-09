@@ -89,4 +89,13 @@ export function getLocalStorageItem(key) {
   localStorage.getItem(key);
 }
 
+export function isNumberArray(arr) {
+  for (const element of arr) {
+    if (typeof element !== 'number') {
+      return false;
+    }
+  }
+  return true;
+}
+
 export const logOutErrorCodes = [401, 403, 419, 429];

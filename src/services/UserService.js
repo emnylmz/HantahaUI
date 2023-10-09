@@ -6,11 +6,11 @@ class UserService {
   register = async (userData) => {
     try {
       const response = await post(END_POINTS.register, userData);
-      if (response.data.errors) {
+      if (response.data && response.data.errors) {
         showMultiLineError(response.data.errors);
         return false;
       } else {
-        showSuccess('Kayıt başarıyla oluşturuldu.');
+        showSuccess('Kayıt başarılı.Giriş yapabilirsiniz.');
         return true;
       }
     } catch (response) {

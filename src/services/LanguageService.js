@@ -9,7 +9,6 @@ class LanguageService {
 
   createOrUpdateLanguage = async (languageData) => {
     try {
-      debugger;
       const response = await post(END_POINTS.createOrUpdateLanguage, languageData);
       if (response.data && response.data.errors) 
         showMultiLineError(response.data.errors);

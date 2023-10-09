@@ -26,7 +26,7 @@ export default function CountrySelect(props) {
       name="country"
       options={props.countries}
       multiple={props.multiple==undefined ?false:true}
-      defaultValue={props.countryIds ===undefined ?[]:props.countryIds}
+      defaultValue={props.multiple===undefined?null:props.countryIds ===undefined ?[]:props.countryIds}
       onChange={(event, newValue) => {
         if(props.multiple==undefined)
         {
