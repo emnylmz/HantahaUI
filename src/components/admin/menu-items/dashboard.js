@@ -1,8 +1,8 @@
 // assets
-import { IconUsers,IconUser,IconLanguage } from '@tabler/icons';
+import { IconUsers,IconUser,IconLanguage,IconLetterF } from '@tabler/icons';
 
 // constant
-const icons = { IconUsers,IconUser,IconLanguage };
+const icons = { IconUsers,IconUser,IconLanguage,IconLetterF };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -27,24 +27,8 @@ const dashboard = {
           icon:icons.IconUser,
           target: true
           
-        },
-        // {
-        //   id: 'register3',
-        //   title: 'Register',
-        //   type: 'item',
-        //   url: '/pages/register/register3',
-        //   target: true
-        // }
+        }
       ]
-    },
-    {
-      id: 'language',
-      title: 'Diller',
-      type: 'item',
-      url: 'language',
-      icon:icons.IconLanguage,
-      target: true
-      
     },
   ],
 };

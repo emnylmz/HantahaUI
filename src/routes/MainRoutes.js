@@ -8,7 +8,8 @@ import Loadable from 'components/admin/Loadable';
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const Users = Loadable(lazy(() => import('pages/admin/Users')));
 const Languages = Loadable(lazy(() => import('pages/admin/Languages')));
-const LanguageEdit = Loadable(lazy(() => import('pages/admin/LanguageEdit')));
+const Verbs = Loadable(lazy(() => import('pages/admin/Verbs')));
+const VerbEdit = Loadable(lazy(() => import('pages/admin/VerbEdit')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -47,10 +48,24 @@ const MainRoutes = {
         {
           path: '',
           element: <Languages />
+        }
+        //editli sayfa olursa
+        // {
+        //   path: 'edit/:id', // ID değeri için dinamik yol
+        //   element: <LanguageEdit />
+        // }
+      ]
+    },
+    {
+      path: 'verb',
+      children: [
+        {
+          path: '',
+          element: <Verbs />
         },
         {
-          path: 'edit/:id', // ID değeri için dinamik yol
-          element: <LanguageEdit />
+          path: 'edit/:id',
+          element: <VerbEdit />
         }
       ]
     },
