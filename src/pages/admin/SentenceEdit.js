@@ -3,81 +3,95 @@ import React from 'react';
 import { TabTitle, checkStringVariableEmpty, checkVariableNullOrUndefined } from 'utils/utils';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import LanguageService from 'services/LanguageService';
+import VerbService from 'services/VerbService';
 import { useState } from 'react';
 import BackDrop from 'components/BackDrop';
 import LanguageSelect from 'components/admin/LanguageSelect';
 import { Button, IconButton, TextField, Tooltip } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Checkbox, FormControlLabel, Grid, Typography } from '@mui/material';
-import VerbService from 'services/VerbService';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { pink } from '@mui/material/colors';
+import SentenceService from 'services/SentenceService';
+import VerbSelect from 'components/admin/VerbSelect';
+import LanguageService from 'services/LanguageService';
 
-export default function VerbEdit() {
-  TabTitle('HantahaAdmin | Fiil Düzenle');
+export default function SentenceEdit() {
+  TabTitle('HantahaAdmin | Cümle Düzenle');
 
   const [loading, setLoading] = useState(true);
   const [isValid, setIsValid] = useState(false);
-  const [verb, setVerb] = useState({ id: 0, name: '', isActive: true, verbItems: [] });
+  const [sentence, setSentence] = useState({ id: 0, name: '', isActive: true, sentenceItems: [], verbs: [] });
+  const [verbs, setVerbs] = useState([]);
   const [languages, setLanguages] = useState([]);
 
   const languageService = new LanguageService();
   const verbService = new VerbService();
+  const sentenceService = new SentenceService();
+
   let { id } = useParams();
-  const verbId = parseInt(id);
+  const sentenceId = parseInt(id);
+
+  let getVerbs = async () => {
+    let result = await verbService.comboList();
+    setVerbs(result);
+  };
 
   let getLanguages = async () => {
     let result = await languageService.comboList();
     setLanguages(result);
   };
 
-  let getVerb = async () => {
-    let result = await verbService.getVerb(verbId);
-    setVerb(result);
+  let getSentence = async () => {
+    let result = await sentenceService.getSentence(sentenceId);
+    setSentence(result);
     setIsValid(true);
   };
 
-  let addVerbItem = () => {
-    const newVerbItem = { id: 0, languageId: 0, context: '' };
+  let addSentenceItem = () => {
+    const newSentenceItem = { id: 0, languageId: 0, context: '' };
 
-    const updatedVerb = { ...verb };
-    updatedVerb.verbItems.push(newVerbItem);
+    const updatedSentence = { ...sentence };
+    updatedSentence.sentenceItems.push(newSentenceItem);
 
-    setVerb(updatedVerb);
+    setSentence(updatedSentence);
     setIsValid(false);
   };
 
   let removeItem = (index) => {
-    const updatedVerb = { ...verb };
-    verb.verbItems.splice(index, 1);
-    setVerb(updatedVerb);
+    const updatedSentence = { ...sentence };
+    updatedSentence.sentenceItems.splice(index, 1);
+    setSentence(updatedSentence);
+    validate();
   };
 
   const handleSubmit = async () => {
     setLoading(true);
-    const verbData = {
-      Id: verb.id,
-      Name: verb.name,
-      IsActive: verb.isActive,
-      VerbItems: verb.verbItems
+    const sentenceData = {
+      Id: sentence.id,
+      Name: sentence.name,
+      IsActive: sentence.isActive,
+      SentenceItems: sentence.sentenceItems,
+      VerbIds: sentence.verbs.map(x=>x.id)
     };
-    await verbService.createOrUpdateVerb(verbData);
+
+    await sentenceService.createOrUpdateSentence(sentenceData);
     setLoading(false);
   };
 
   const validate = () => {
-    if (checkVariableNullOrUndefined(verb.name) || checkStringVariableEmpty(verb.name)) {
+    if (checkVariableNullOrUndefined(sentence.name) || checkStringVariableEmpty(sentence.name)) {
       setIsValid(false);
       return;
     }
 
-    for (const verbItem of verb.verbItems) {
+    for (const sentenceItem of sentence.sentenceItems) {
       if (
-        checkVariableNullOrUndefined(verbItem.context) ||
-        checkStringVariableEmpty(verbItem.context) ||
-        checkVariableNullOrUndefined(verbItem.languageId) ||
-        checkStringVariableEmpty(verbItem.languageId) || verbItem.languageId===0
+        checkVariableNullOrUndefined(sentenceItem.context) ||
+        checkStringVariableEmpty(sentenceItem.context) ||
+        checkVariableNullOrUndefined(sentenceItem.languageId) ||
+        checkStringVariableEmpty(sentenceItem.languageId) ||
+        sentenceItem.languageId === 0
       ) {
         setIsValid(false);
         return;
@@ -87,11 +101,12 @@ export default function VerbEdit() {
   };
 
   useEffect(() => {
-    if (isNaN(verbId)) window.location.href = '/verb';
+    if (isNaN(sentenceId)) window.location.href = '/sentence';
     else {
-      if (verbId !== 0) getVerb();
-
+      setLoading(true);
       getLanguages();
+      getVerbs();
+      if (sentenceId !== 0) getSentence();
       setLoading(false);
     }
   }, []);
@@ -100,46 +115,61 @@ export default function VerbEdit() {
     <MainCard>
       <BackDrop loading={loading} />
       <Typography component="h2" variant="h3" style={{ marginTop: '20px', marginBottom: '20px' }}>
-        Fiil Ekle/Güncelle
+        Cümle Ekle/Güncelle
       </Typography>
       {!loading ? (
         <>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-              id="groupName"
+                id="groupName"
                 required
-                value={verb.name}
+                value={sentence.name}
                 fullWidth
                 inputProps={{
                   maxLength: 50
                 }}
                 onChange={(e) => {
-                  setVerb((prevData) => ({
+                  setSentence((prevData) => ({
                     ...prevData,
                     name: e.target.value
                   }));
                 }}
                 label="Grup Adı"
               />
+
               <Tooltip title="Dil Ekle">
-                <IconButton className="marginTop5" onClick={() => addVerbItem()} color="primary" aria-label="add verb">
+                <IconButton className="marginTop5" onClick={() => addSentenceItem()} color="primary" aria-label="add sentence">
                   <AddCircleIcon fontSize="medium" />
 
                   <div style={{ fontSize: 'large' }}> Dil Ekle</div>
                 </IconButton>
               </Tooltip>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
+                <VerbSelect
+                  verbIds={sentence.verbs}
+                  multiple={true}
+                  verbs={verbs}
+                  setVerbIds={(e) => {
+                    setSentence((p) => ({
+                      ...p,
+                      verbs: e
+                    }));
+                  }}
+                />
+              
+            </Grid>
+            <Grid item xs={12} sm={2}>
               <Typography gutterBottom>
                 <FormControlLabel
                   id="isActive"
                   control={
                     <Checkbox
-                      checked={verb.isActive}
+                      checked={sentence.isActive}
                       color="primary"
                       onChange={() => {
-                        setVerb((p) => ({
+                        setSentence((p) => ({
                           ...p,
                           isActive: !p.isActive
                         }));
@@ -153,39 +183,43 @@ export default function VerbEdit() {
             </Grid>
           </Grid>
 
-          {verb.verbItems.map((verbItem, index) => (
+          {sentence.sentenceItems.map((sentenceItem, index) => (
             <div key={index}>
               <Grid container spacing={2} className="marginTop5">
                 <Grid item xs={12} sm={4}>
-                  {!loading ?<LanguageSelect
-                  index={index}
-                    languageId={verb.verbItems[index].languageId}
-                    languages={languages}
-                    setLanguageId={(e) => {
-                      const updatedVerb = { ...verb };
-                      updatedVerb.verbItems[index].languageId = e;
-                      setVerb(updatedVerb);
-                      validate();
-                    }}
-                  />:<></>}
+                  {!loading ? (
+                    <LanguageSelect
+                      index={index}
+                      languageId={sentence.sentenceItems[index].languageId}
+                      languages={languages}
+                      setLanguageId={(e) => {
+                        const updatedSentence = { ...sentence };
+                        updatedSentence.sentenceItems[index].languageId = e;
+                        setSentence(updatedSentence);
+                        validate();
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
                 </Grid>
                 <Grid item xs={12} sm={7}>
                   <TextField
-                    id={"context-"+index}
+                    id={'context-' + index}
                     required
                     fullWidth
                     multiline
-                    value={verbItem.context}
+                    value={sentenceItem.context}
                     inputProps={{
-                      maxLength: 300
+                      maxLength: 500
                     }}
                     onChange={(e) => {
-                      const updatedVerb = { ...verb };
-                      updatedVerb.verbItems[index].context = e.target.value;
-                      setVerb(updatedVerb);
+                      const updatedSentence = { ...sentence };
+                      updatedSentence.sentenceItems[index].context = e.target.value;
+                      setSentence(updatedSentence);
                       validate();
                     }}
-                    label="Fiil"
+                    label="Cümle"
                   />
                 </Grid>
                 <Grid item xs={12} sm={1}>
@@ -202,7 +236,9 @@ export default function VerbEdit() {
             Kaydet
           </Button>
         </>
-      ) : <></>}
+      ) : (
+        <></>
+      )}
     </MainCard>
   );
 }

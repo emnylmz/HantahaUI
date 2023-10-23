@@ -13,13 +13,13 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { pink } from '@mui/material/colors';
 import alertify from 'alertifyjs';
 import { useCallback } from 'react';
-import VerbService from 'services/VerbService';
 import UndoIcon from '@mui/icons-material/Undo';
+import SentenceService from 'services/SentenceService';
 
-const verbService = new VerbService();
+const sentenceService = new SentenceService();
 
-const Verbs = () => {
-  TabTitle('HantahaAdmin | Fiiller');
+const Sentences = () => {
+  TabTitle('HantahaAdmin | Cümleler');
   const columns = [
     {
       name: 'id',
@@ -29,11 +29,11 @@ const Verbs = () => {
         return (
           <>
             <Tooltip title="Düzenle">
-              <IconButton aria-label="edit" size="small" onClick={() => (window.open('/verb/edit/' + value,'_blank'))}>
+              <IconButton aria-label="edit" size="small" onClick={() => (window.location.href = '/sentence/edit/' + value)}>
                 <EditIcon color="primary" fontSize="inherit" />
               </IconButton>
             </Tooltip>
-            {verbs.find((x) => x.id === value).isDeleted === false ? (
+            {sentences.find((x) => x.id === value).isDeleted === false ? (
               <Tooltip title="Sil">
                 <IconButton onClick={() => setIsDeleted(value)} aria-label="edit" size="small">
                   <DeleteIcon sx={{ color: pink[500] }} fontSize="inherit" />
@@ -94,22 +94,8 @@ const Verbs = () => {
     { name: 'createdOn', operator: 'after', type: 'date', value: '' }
   ];
 
-  const [verbs, setVerbs] = useState([]);
+  const [sentences, setSentences] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  // const handleSubmit = async () => {
-  //   setLoading(true);
-  //   const languageData = {
-  //     Id: language.id,
-  //     IsActive: language.isActive,
-  //     Name: language.name,
-  //     LanguageCountries:isNumberArray(language.languageCountries)===true?language.languageCountries:language.languageCountries.map(x=>x.id)
-  //   };
-  //   const result = await languageService.createOrUpdateLanguage(languageData);
-  //   if (result) await getLanguageList();
-  //   setLoading(false);
-  //   setOpen(false);
-  // };
 
   const rowClassName = ({data})=> {
     if (data.isDeleted === true) {
@@ -117,24 +103,24 @@ const Verbs = () => {
     }
   }
 
-  const getVerbList = useCallback(async () => {
+  const getSentenceList = useCallback(async () => {
     setLoading(true);
-    let verbs = await verbService.list();
-    setVerbs(verbs);
+    let sentences = await sentenceService.list();
+    setSentences(sentences);
     setLoading(false);
-  }, [verbService]);
+  }, [sentenceService]);
 
   const setIsDeleted = async (id) => {
-    const verb = verbs.find((x) => x.id === id);
-    const phrase=verb.isDeleted===false?' silmek':'geri almak';
-    const button=verb.isDeleted===false?'Sil':'Geri Al';
+    const sentence = sentences.find((x) => x.id === id);
+    const phrase=sentence.isDeleted===false?' silmek':'geri almak';
+    const button=sentence.isDeleted===false?'Sil':'Geri Al';
     alertify
       .confirm(
-        verb.name,
-        verb.name + ' adlı kaydı'+phrase +' istediğinizden emin misiniz?',
+        sentence.name,
+        sentence.name + ' adlı kaydı'+phrase +' istediğinizden emin misiniz?',
         async function () {
-          await verbService.setIsDeletedVerb(id,verb.isDeleted);
-          getVerbList();
+          await sentenceService.setIsDeleted(id,sentence.isDeleted);
+          getSentenceList();
         },
         function () {}
       )
@@ -143,7 +129,7 @@ const Verbs = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      getVerbList();
+      getSentenceList();
     };
     fetchData();
   }, []);
@@ -151,20 +137,20 @@ const Verbs = () => {
   return (
     <MainCard>
       <BackDrop loading={loading} />
-      <Tooltip title="Fiil Ekle">
+      <Tooltip title="Cümle Ekle">
         <IconButton
           onClick={() => {
-            window.open('/verb/edit/0','_blank')
+            window.open('/sentence/edit/0','_blank')
           }}
           color="primary"
-          aria-label="add verb"
+          aria-label="add sentence"
         >
           <AddCircleIcon fontSize="medium" />
         </IconButton>
       </Tooltip>
-      <Table dataSource={verbs} rowClassName={rowClassName} columns={columns} gridStyle={gridStyle} defaultFilterValue={defaultFilterValue} />
+      <Table dataSource={sentences} rowClassName={rowClassName} columns={columns} gridStyle={gridStyle} defaultFilterValue={defaultFilterValue} />
     </MainCard>
   );
 };
 
-export default Verbs;
+export default Sentences;

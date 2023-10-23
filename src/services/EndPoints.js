@@ -26,8 +26,18 @@ const END_POINTS = {
   //verb
   verbList: createEndpoint('/verb/List'),
   createOrUpdateVerb: createEndpoint('/verb/CreateOrUpdate'),
-  removeVerb: createEndpoint('/verb/Remove'),
+  setIsDeletedVerb: createEndpoint('/verb/SetIsDeleted'),
   getVerb: createEndpoint('/verb/Get'),
+  verbComboList: createEndpoint('/verb/ComboList'),
+
+  //sentence
+  sentenceList: createEndpoint('/sentence/List'),
+  createOrUpdateSentence: createEndpoint('/sentence/CreateOrUpdate'),
+  setIsDeletedSentence: createEndpoint('/sentence/SetIsDeleted'),
+  getSentence: createEndpoint('/sentence/Get'),
+
+  //systemLog
+  systemLog: createEndpoint('/systemLog/List'),
 };
 
 export { API_BASE_URL, END_POINTS, createEndpoint };

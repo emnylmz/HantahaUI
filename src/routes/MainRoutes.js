@@ -10,6 +10,9 @@ const Users = Loadable(lazy(() => import('pages/admin/Users')));
 const Languages = Loadable(lazy(() => import('pages/admin/Languages')));
 const Verbs = Loadable(lazy(() => import('pages/admin/Verbs')));
 const VerbEdit = Loadable(lazy(() => import('pages/admin/VerbEdit')));
+const Sentences = Loadable(lazy(() => import('pages/admin/Sentences')));
+const SentenceEdit = Loadable(lazy(() => import('pages/admin/SentenceEdit')));
+const SystemLog = Loadable(lazy(() => import('pages/admin/SystemLog')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -66,6 +69,28 @@ const MainRoutes = {
         {
           path: 'edit/:id',
           element: <VerbEdit />
+        }
+      ]
+    },
+    {
+      path: 'sentence',
+      children: [
+        {
+          path: '',
+          element: <Sentences />
+        },
+        {
+          path: 'edit/:id',
+          element: <SentenceEdit />
+        }
+      ]
+    },
+    {
+      path: 'systemLog',
+      children: [
+        {
+          path: '',
+          element: <SystemLog />
         }
       ]
     },

@@ -13,9 +13,7 @@ export default function ThemeRoutes() {
   // const routeResult = useRoutes([MainRoutes,AuthenticationRoutes]); 
 
   return (
-    <>
-      {routeResult}
-      {/* <ErrorBoundary/> */}
-    </>
+    isAdmin ? (
+      {routeResult}):(routeResult)
   );
 }

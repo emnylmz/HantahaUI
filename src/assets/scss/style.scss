@@ -127,6 +127,18 @@
   }
 }
 
+.global-custom-row-dark-magenta, .global-custom-row-dark-magenta:hover, .global-custom-row-dark-magenta:hover .InovuaReactDataGrid__cell {
+  background: #CD5C5C!important;
+}
+
+.marginTop5{
+  margin-top: 5px;
+}
+
+.marginTop15{
+  margin-top: 15px;
+}
+
 // ==============================|| ALERTIFY JS ||============================== //
 
 .alertify-notifier .ajs-message.ajs-error{

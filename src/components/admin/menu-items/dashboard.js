@@ -1,8 +1,8 @@
 // assets
-import { IconUsers,IconUser,IconLanguage,IconLetterF } from '@tabler/icons';
+import { IconUsers,IconUser,IconLanguage,IconLetterF,IconBug } from '@tabler/icons';
 
 // constant
-const icons = { IconUsers,IconUser,IconLanguage,IconLetterF };
+const icons = { IconUsers,IconUser,IconLanguage,IconLetterF,IconBug };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -29,6 +29,14 @@ const dashboard = {
           
         }
       ]
+    },
+    {
+      id: 'systemLog',
+      title: 'Hata Yönetimi',
+      type: 'item',
+      url: 'systemLog',
+      icon: icons.IconBug,
+      target: true
     },
   ],
 };

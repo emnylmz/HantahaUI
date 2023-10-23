@@ -2,38 +2,37 @@ import { showMultiLineError, showSuccess } from 'utils/utils';
 import { get,post } from './BaseService';
 import { END_POINTS } from './EndPoints';
 
-class VerbService {
+class SentenceService {
   
   list = async () => {
-    const response = await get(END_POINTS.verbList);
+    const response = await get(END_POINTS.sentenceList);
     return response;
   };
 
-  createOrUpdateVerb = async (verbData) => {
+  createOrUpdateSentence = async (sentenceData) => {
     try {
-      const response = await post(END_POINTS.createOrUpdateVerb, verbData);
+      const response = await post(END_POINTS.createOrUpdateSentence, sentenceData);
       if (response.data && response.data.errors) 
         showMultiLineError(response.data.errors);
       else 
       {
         Promise.resolve().then(function() {
-          showSuccess(verbData.Id === 0 ? 'Kayıt başarıyla oluşturuldu.' : 'Kayıt başarıyla güncellendi.');
+          showSuccess(sentenceData.Id === 0 ? 'Kayıt başarıyla oluşturuldu.' : 'Kayıt başarıyla güncellendi.');
           setTimeout(function() {
-            window.location.href = '/verb';
+            window.location.href = '/sentence';
           }, 1000);
         });
       }
       
     } catch (response) {
-      console.log(response)
       if (response.data && response.data.errors) showMultiLineError(response.data.errors);
     }
   };
 
-  setIsDeletedVerb = async (verbId,isDeleted) => {
+  setIsDeleted = async (sentenceId,isDeleted) => {
     try {
       
-      const response = await post(END_POINTS.setIsDeletedVerb, {Id:verbId});
+      const response = await post(END_POINTS.setIsDeletedSentence, {Id:sentenceId});
       if (response.data && response.data.errors) 
         showMultiLineError(response.data.errors);
       else 
@@ -44,15 +43,10 @@ class VerbService {
     }
   };
 
-  getVerb = async (id) => {
-    const response = await post(END_POINTS.getVerb,{Id:id});
+  getSentence = async (id) => {
+    const response = await post(END_POINTS.getSentence,{Id:id});
     return response.data;
-  };
-
-  comboList = async () => {
-    const response = await get(END_POINTS.verbComboList);
-    return response;
   };
 }
 
-export default VerbService;
+export default SentenceService;

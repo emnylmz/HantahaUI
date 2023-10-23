@@ -6,7 +6,6 @@ import { Popper } from "@mui/material";
 import { checkVariableNullOrUndefined } from "../../utils/utils";
 
 export default function LanguageSelect(props) {
-  console.log(props.languages)
   const PopperMy = function (props) {
     return (
       <Popper
@@ -21,13 +20,15 @@ export default function LanguageSelect(props) {
 
   return (
     <Autocomplete
-      id="language-select"
+      id={props.index!=undefined?"language-select"+props.index:"language-select"}
       name="language"
       options={props.languages}
-      defaultValue={props.languages.find(x=>x.id==props.languageId)}
+      defaultValue={props.languages.find(x=>x.id==props.languageId)||null}
+      value={props.languages.find(x=>x.id==props.languageId) || null}
       onChange={(event, newValue) => {
         if (checkVariableNullOrUndefined(newValue)) setLanguageId("");
           else setLanguageId(newValue.id);
+          return props.languageId
       }}
       PopperComponent={PopperMy}
       ListboxProps={{ style: { maxHeight: 150 } }}

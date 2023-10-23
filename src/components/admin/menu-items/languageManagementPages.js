@@ -1,11 +1,11 @@
 // assets
-import { IconLanguage,IconLetterF } from '@tabler/icons';
-
+import { IconLanguage, IconLetterF, IconLetterC } from '@tabler/icons';
 
 // constant
 const icons = {
   IconLanguage,
-  IconLetterF
+  IconLetterF,
+  IconLetterC
 };
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -20,7 +20,7 @@ const languageManagementPages = {
       title: 'Diller',
       type: 'item',
       url: 'language',
-      icon:icons.IconLanguage,
+      icon: icons.IconLanguage,
       target: true
     },
     {
@@ -28,10 +28,18 @@ const languageManagementPages = {
       title: 'Fiiller',
       type: 'item',
       url: 'verb',
-      icon:icons.IconLetterF,
+      icon: icons.IconLetterF,
       target: true
     },
-  ],
+    {
+      id: 'sentence',
+      title: 'Cümleler',
+      type: 'item',
+      url: 'sentence',
+      icon: icons.IconLetterC,
+      target: true
+    }
+  ]
 };
 
 export default languageManagementPages;

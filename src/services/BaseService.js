@@ -2,25 +2,6 @@ import axios from 'axios';
 import { API_BASE_URL } from './EndPoints';
 import {getCookie, logOutErrorCodes, logOutTransactions, showAlert } from 'utils/utils';
 
-const handleErrorResponse = (error) => {
-  if (error.response) {
-    return {
-      status: error.response.status,
-      data: error.response.data
-    };
-  } else if (error.request) {
-    return {
-      status: 0,
-      data: 'No response received from the server.'
-    };
-  } else {
-    return {
-      status: -1,
-      data: 'An error occurred while making the request.'
-    };
-  }
-};
-
 export async function get(endpoint) {
   const api = axios.create({
     baseURL: API_BASE_URL
@@ -38,8 +19,6 @@ export async function get(endpoint) {
       logOutTransactions();
     else if(error.response.status===500)
     showAlert("Hata","Sorun sizde değil bizde. Sorun ile en yakın zamanda ilgileneceğiz.")
-      
-    throw handleErrorResponse(error);
   }
 }
 

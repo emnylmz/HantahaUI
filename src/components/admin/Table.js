@@ -1,10 +1,10 @@
 import React from 'react';
-import '@inovua/reactdatagrid-community/index.css';
 import ReactDataGrid from '@inovua/reactdatagrid-community';
 import { i18n } from 'components/Tablei18n';
 import { useState } from 'react';
 import BackDrop from 'components/BackDrop';
 import { useEffect } from 'react';
+import '@inovua/reactdatagrid-community/index.css';
 
 // import SelectFilter from '@inovua/reactdatagrid-community/SelectFilter'
 // import DateFilter from '@inovua/reactdatagrid-community/DateFilter'
@@ -37,6 +37,7 @@ function Table(props) {
       {!loading ?<ReactDataGrid
         idProperty="id"
         columns={props.columns}
+        rowClassName={props.rowClassName!=undefined?props.rowClassName:undefined}
         i18n={i18n}
         emptyText={emptyText}
         dataSource={props.dataSource || []}
