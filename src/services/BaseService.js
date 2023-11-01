@@ -35,6 +35,5 @@ export async function post(endpoint, data) {
     const response = await api.post(endpoint, data);
     return response.data;
   } catch (error) {
-    throw handleErrorResponse(error);
   }
 }

@@ -164,7 +164,7 @@ export default function SignUp() {
 
   return (
     <>
-      {navigate ? <Navigate to="/login"></Navigate> : <></>}
+      {navigate ? <Navigate to="/auth/login"></Navigate> : <></>}
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="sm">
           <CssBaseline />
@@ -369,7 +369,7 @@ export default function SignUp() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link href="/auth/login" variant="body2">
                     Zaten bir hesabınız var mı? Oturum aç
                   </Link>
                 </Grid>

@@ -16,17 +16,12 @@ const SystemLog = Loadable(lazy(() => import('pages/admin/SystemLog')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
-const MainRoutes = {
+const AdminRoutes = {
   path: '/',
   element: (
         <MainLayout />
   ),
   children: [
-    {
-      path: '/',
-      element: <DashboardDefault />
-    },
-    
     {
       path: '/adminHome',
       children: [
@@ -52,11 +47,6 @@ const MainRoutes = {
           path: '',
           element: <Languages />
         }
-        //editli sayfa olursa
-        // {
-        //   path: 'edit/:id', // ID değeri için dinamik yol
-        //   element: <LanguageEdit />
-        // }
       ]
     },
     {
@@ -97,4 +87,4 @@ const MainRoutes = {
   ]
 };
 
-export default MainRoutes;
+export default AdminRoutes;

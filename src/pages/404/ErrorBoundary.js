@@ -1,7 +1,9 @@
 import React from 'react'
 import './css/style.css'
+import { TabTitle } from 'utils/utils';
 
 function ErrorBoundary() {
+	TabTitle("Oops!")
   return (
     <div id="notfound">
 		<div className="notfound">

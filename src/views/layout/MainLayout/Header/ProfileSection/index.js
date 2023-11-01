@@ -92,14 +92,14 @@ const ProfileSection = () => {
           alignItems: 'center',
           borderRadius: '27px',
           transition: 'all .2s ease-in-out',
-          borderColor: theme.palette.primary.light,
-          backgroundColor: theme.palette.primary.light,
+          borderColor: "#EAD2AC",
+          backgroundColor: "#EAD2AC",
           '&[aria-controls="menu-list-grow"], &:hover': {
-            borderColor: theme.palette.primary.main,
-            background: `${theme.palette.primary.main}!important`,
-            color: theme.palette.primary.light,
+            borderColor: "#393E41",
+            background: `#393E41!important`,
+            color: "#EAD2AC",
             '& svg': {
-              stroke: theme.palette.primary.light
+              stroke: "#EAD2AC"
             }
           },
           '& .MuiChip-label': {
@@ -108,17 +108,20 @@ const ProfileSection = () => {
         }}
         icon={
           <Avatar
-            src={User1}
             sx={{
               ...theme.typography.mediumAvatar,
               margin: '8px 0 8px 8px !important',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              bgcolor:"#5C415D",
+              color:"#EAD2AC"
             }}
             ref={anchorRef}
             aria-controls={open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
             color="inherit"
-          />
+          >
+            {fullname.charAt(0)}
+          </Avatar>
         }
         label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
         variant="outlined"

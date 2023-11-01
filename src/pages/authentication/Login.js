@@ -11,11 +11,8 @@ import Logo from 'components/admin/Logo';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import MainCard from 'components/admin/cards/MainCard';
-import { clearCookieValue } from 'utils/utils';
 
 const Login = () => {
-  clearCookieValue('hanTaha-auth-token');
-  clearCookieValue('isAdmin');
   const theme = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -80,7 +77,7 @@ const Login = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <Grid item container direction="column" alignItems="center" xs={12}>
-                      <Typography component={Link} to="/register" variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                      <Typography component={Link} to="/auth/register" variant="subtitle1" sx={{ textDecoration: 'none' }}>
                       Hesabınız yok mu?
                       </Typography>
                     </Grid>

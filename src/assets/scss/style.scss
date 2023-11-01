@@ -224,3 +224,41 @@
   min-width: 88px;
   min-height: 35px;
 }
+
+.logo{
+  cursor: pointer
+}
+
+#circle-avatar {
+  display: grid;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #ffbd30;
+  place-items: center;
+
+  span {
+    font-size: 48px;
+    font-weight: bold;
+  }
+}
+
+#userLayout.body{
+background-color: #3593D2;
+}
+
+.wordSearch{
+  border-radius: 20px;
+  border-color:#ffbd30
+}
+
+.wordCardColor{
+  background-color:#ffbd30 ;
+}
+
+.wordCardRadius{
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-style: solid;
+  border-color: #ffbd30;
+}
