@@ -68,7 +68,7 @@ const SystemLog = () => {
   return (
     <MainCard>
       <BackDrop loading={loading} />
-      <Table dataSource={log} columns={columns} defaultFilterValue={defaultFilterValue} />
+      <Table dataSource={log}  columns={columns} defaultFilterValue={defaultFilterValue} />
     </MainCard>
   );
 };

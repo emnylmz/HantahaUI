@@ -79,8 +79,6 @@ const Users = () => {
     { name: 'isAdmin', header: 'Rol', minWidth: 50, defaultFlex: 0.5, render: ({ value }) => (value ? 'Yönetici' : 'Kullanıcı') }
   ];
 
-  const gridStyle = { minHeight: 550 };
-
   const defaultFilterValue = [
     { name: 'fullname', operator: 'startsWith', type: 'string', value: '' },
     { name: 'country', operator: 'startsWith', type: 'string', value: '' },
@@ -178,7 +176,7 @@ const Users = () => {
         </DialogActions>
       </Dialog>
 
-      {!loading ? <Table dataSource={users} columns={columns} gridStyle={gridStyle} defaultFilterValue={defaultFilterValue} /> : <></>}
+      {!loading ? <Table dataSource={users} columns={columns} defaultFilterValue={defaultFilterValue} /> : <></>}
     </MainCard>
   );
 };

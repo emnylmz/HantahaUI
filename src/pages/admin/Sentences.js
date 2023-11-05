@@ -84,7 +84,6 @@ const Sentences = () => {
     }
   ];
 
-  const gridStyle = { minHeight: 550 };
 
   const defaultFilterValue = [
     { name: 'name', operator: 'startsWith', type: 'string', value: '' },
@@ -148,7 +147,7 @@ const Sentences = () => {
           <AddCircleIcon fontSize="medium" />
         </IconButton>
       </Tooltip>
-      <Table dataSource={sentences} rowClassName={rowClassName} columns={columns} gridStyle={gridStyle} defaultFilterValue={defaultFilterValue} />
+      <Table dataSource={sentences} rowClassName={rowClassName} columns={columns} defaultFilterValue={defaultFilterValue} />
     </MainCard>
   );
 };

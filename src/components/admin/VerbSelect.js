@@ -10,8 +10,6 @@ export default function VerbSelect(props) {
   };
   const { setVerbIds,verbIds } = props;
 
-  console.log(verbIds)
-
   return (
     <Autocomplete
       id={props.index != undefined ? 'verb-select' + props.index : 'verb-select'}

@@ -50,7 +50,9 @@ const ProfileSection = () => {
   const handleLogout = async () => {
     const authService = new AuthService();
      await authService.logout();
-     navigate('/home')
+     setTimeout(function() {
+      window.location.href = '/home';
+    }, 1000);
      setSelectedIndex(-1)
   };
 

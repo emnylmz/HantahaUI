@@ -10,8 +10,9 @@ import Loadable from 'components/admin/Loadable';
 
 export default function ThemeRoutes() {
   const ErrorBoundary = Loadable(lazy(() => import('pages/404/ErrorBoundary')));
-console.log(getCookie('isAdmin') )
   const isAdmin = getCookie('isAdmin') == 'true';
+  const token = getCookie('hanTaha-auth-token');
+  
   let routes = [
     AuthenticationRoutes,
     UserRoutes,
@@ -22,9 +23,7 @@ console.log(getCookie('isAdmin') )
   ];
   if (isAdmin) routes = [...routes, AdminRoutes];
   const routeResult = useRoutes(routes);
-
-  // test için burayı aç
-  // const routeResult = useRoutes([MainRoutes,AuthenticationRoutes]);
+ 
 
   return routeResult;
 }

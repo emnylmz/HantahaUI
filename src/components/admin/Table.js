@@ -41,7 +41,7 @@ function Table(props) {
         i18n={i18n}
         emptyText={emptyText}
         dataSource={props.dataSource || []}
-        style={props.gridStyle}
+        style={{minHeight: 550}}
         pagination
         enableSelection
         defaultFilterValue={props.defaultFilterValue}

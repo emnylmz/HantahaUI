@@ -25,7 +25,6 @@ class VerbService {
       }
       
     } catch (response) {
-      console.log(response)
       if (response.data && response.data.errors) showMultiLineError(response.data.errors);
     }
   };
@@ -52,6 +51,20 @@ class VerbService {
   comboList = async () => {
     const response = await get(END_POINTS.verbComboList);
     return response;
+  };
+
+  getVerbItemListByPageNumber = async (pageNumber,searchText) => {
+    try {
+      
+      const response = await post(END_POINTS.getUserVerbList, {PageNumber:pageNumber,Search:searchText});
+      if (response.data && response.data.errors) 
+        showMultiLineError(response.data.errors);
+      else
+        return response.data;
+      
+    } catch (response) {
+      if (response.data && response.data.errors) showMultiLineError(response.data.errors);
+    }
   };
 }
 

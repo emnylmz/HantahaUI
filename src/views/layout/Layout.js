@@ -6,7 +6,6 @@ import { Grid } from '@mui/material';
 
 function Layout() {
   useEffect(() => {
-    console.log('adsad');
   }, []);
 
   return (

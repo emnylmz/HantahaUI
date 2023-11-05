@@ -84,8 +84,6 @@ const Verbs = () => {
     }
   ];
 
-  const gridStyle = { minHeight: 550 };
-
   const defaultFilterValue = [
     { name: 'name', operator: 'startsWith', type: 'string', value: '' },
     { name: 'updatedBy', operator: 'startsWith', type: 'string', value: '' },
@@ -162,7 +160,7 @@ const Verbs = () => {
           <AddCircleIcon fontSize="medium" />
         </IconButton>
       </Tooltip>
-      <Table dataSource={verbs} rowClassName={rowClassName} columns={columns} gridStyle={gridStyle} defaultFilterValue={defaultFilterValue} />
+      <Table dataSource={verbs} rowClassName={rowClassName} columns={columns} defaultFilterValue={defaultFilterValue} />
     </MainCard>
   );
 };

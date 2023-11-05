@@ -29,6 +29,7 @@ const END_POINTS = {
   setIsDeletedVerb: createEndpoint('/verb/SetIsDeleted'),
   getVerb: createEndpoint('/verb/Get'),
   verbComboList: createEndpoint('/verb/ComboList'),
+  getUserVerbList: createEndpoint('/verb/GetUserVerbList'),
 
   //sentence
   sentenceList: createEndpoint('/sentence/List'),

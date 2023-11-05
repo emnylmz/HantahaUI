@@ -94,8 +94,6 @@ const Language = () => {
     setLoading(false);
   };
 
-  const gridStyle = { minHeight: 550 };
-
   const defaultFilterValue = [
     { name: 'name', operator: 'startsWith', type: 'string', value: '' },
     { name: 'updatedBy', operator: 'startsWith', type: 'string', value: '' },
@@ -236,7 +234,7 @@ const Language = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Table dataSource={languages} columns={columns} gridStyle={gridStyle} defaultFilterValue={defaultFilterValue} />
+      <Table dataSource={languages} columns={columns} defaultFilterValue={defaultFilterValue} />
     </MainCard>
   );
 };
