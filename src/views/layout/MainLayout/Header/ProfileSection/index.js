@@ -33,6 +33,7 @@ import User1 from 'assets/images/users/user-round.svg';
 import { IconLogout, IconSettings } from '@tabler/icons';
 import AuthService from 'services/AuthService';
 import { getCookie } from 'utils/utils';
+import { Fragment } from 'react';
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -89,55 +90,71 @@ const ProfileSection = () => {
   return (
     <>
       <Chip
-        sx={{
-          height: '48px',
-          alignItems: 'center',
-          borderRadius: '27px',
-          transition: 'all .2s ease-in-out',
-          borderColor: "#EAD2AC",
-          backgroundColor: "#EAD2AC",
-          '&[aria-controls="menu-list-grow"], &:hover': {
-            borderColor: "#393E41",
-            background: `#393E41!important`,
-            color: "#EAD2AC",
-            '& svg': {
-              stroke: "#EAD2AC"
-            }
-          },
-          '& .MuiChip-label': {
-            lineHeight: 0
-          }
-        }}
-        icon={
-          <Avatar
-            sx={{
-              ...theme.typography.mediumAvatar,
-              margin: '8px 0 8px 8px !important',
-              cursor: 'pointer',
-              bgcolor:"#5C415D",
-              color:"#EAD2AC"
-            }}
-            ref={anchorRef}
-            aria-controls={open ? 'menu-list-grow' : undefined}
-            aria-haspopup="true"
-            color="inherit"
-          >
-            {fullname.charAt(0)}
-          </Avatar>
-        }
-        label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
-        variant="outlined"
-        ref={anchorRef}
-        aria-controls={open ? 'menu-list-grow' : undefined}
-        aria-haspopup="true"
-        onClick={handleToggle}
-        color="primary"
-      />
+  sx={{
+    height: '48px',
+    alignItems: 'center',
+    borderRadius: '27px',
+    transition: 'all .2s ease-in-out',
+    borderColor: "#EAD2AC",
+    backgroundColor: "#EAD2AC",
+    '&[aria-controls="menu-list-grow"], &:hover': {
+      borderColor: "#393E41",
+      background: `#393E41!important`,
+      color: "#EAD2AC",
+      '& svg': {
+        stroke: "#EAD2AC"
+      },
+      '& p': {
+        color: "#EAD2AC"
+      }
+    },
+    '& .MuiChip-label': {
+      display: 'flex',
+      alignItems: 'center',  // Yatay olarak ortala
+      padding: '0 8px',      // Sağa ve sola boşluk bırak
+      lineHeight: 0
+    }
+  }}
+  icon={
+    <Avatar
+      sx={{
+        ...theme.typography.mediumAvatar,
+        margin: '8px 0 8px 8px !important',
+        cursor: 'pointer',
+        bgcolor:"#D4A373",
+        color:"#E9EDC9"
+      }}
+      ref={anchorRef}
+      aria-controls={open ? 'menu-list-grow' : undefined}
+      aria-haspopup="true"
+      color="inherit"
+    >
+      {/* burası firstname lastname gelmeli */}
+      {fullname.split(' ')[0].charAt(0)}
+    {fullname.split(' ').length > 1 ? fullname.split(' ')[1].charAt(0) : ''}
+    </Avatar>
+  }
+  label={
+    <Fragment>
+      <p className='myAccount'>Hesabım</p>
+      <IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />
+    </Fragment>
+  }
+  variant="outlined"
+  ref={anchorRef}
+  aria-controls={open ? 'menu-list-grow' : undefined}
+  aria-haspopup="true"
+  onClick={handleToggle}
+  color="primary"
+/>
+
+
       <Popper
         placement="bottom-end"
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}
+        style={{zIndex:1}}
         transition
         disablePortal
         popperOptions={{
@@ -153,10 +170,10 @@ const ProfileSection = () => {
       >
         {({ TransitionProps }) => (
           <Transitions in={open} {...TransitionProps}>
-            <Paper>
+            <Paper >
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
-                  <Box sx={{ p: 2 }}>
+                  <Box sx={{ paddingTop:2, paddingLeft:2,paddingRight:2}}>
                     <Stack>
                       <Stack direction="row" spacing={0.5} alignItems="center">
                         <Typography variant="h4">{fullname}</Typography>
@@ -166,7 +183,7 @@ const ProfileSection = () => {
                     <Divider></Divider>
                   </Box>
                   <PerfectScrollbar style={{ height: '100%', overflowX: 'hidden' }}>
-                    <Box sx={{ p: 2 }}>
+                    <Box sx={{ paddingLeft:2,paddingRight:2}}>
                       <List
                         component="nav"
                         sx={{

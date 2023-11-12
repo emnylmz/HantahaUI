@@ -40,13 +40,10 @@ const Navbar = () => {
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
             <li>
-              <NavLink to="/home">Home</NavLink>
+              <NavLink to="/home">Anasayfa</NavLink>
             </li>
             <li>
-              <NavLink to="/about">About</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact">Contact</NavLink>
+              <NavLink to="/contact">Bize Ulaşın</NavLink>
             </li>
             {isAuthenticated ? (
               <li>

@@ -6,7 +6,7 @@ class AuthService {
   login = async (loginDto) => {
     try {
       const response = await post(END_POINTS.login, loginDto);
-      setTokenCookie(response.data);
+      await setTokenCookie(response.data);
       showSuccess('Hoşgeldiniz.');
       return response.data;
     } catch (response) {

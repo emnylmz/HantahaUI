@@ -84,9 +84,14 @@ export default function Home() {
       </Grid>
       {!loading ? (
         <>
+        <Stack spacing={2}>
+            <Grid sx={4} style={{ marginTop: '10px' }} container direction="row" justifyContent="center" alignItems="center">
+              <Pagination size="small" disabled={paginationIsDisabled} count={pageCount} page={page} onChange={handleChange} />
+            </Grid>
+          </Stack>
           <Grid style={{ marginTop: '5px' }} container direction="row" spacing={2}>
             {verbItems.map((verbItem, index) => (
-              <Grid key={index} item xs={12} sm={6} md={6} lg={4}>
+              <Grid key={index} item xs={12} sm={6} md={6} lg={3}>
                 <WordCard verbItem={verbItem} />
               </Grid>
             ))}

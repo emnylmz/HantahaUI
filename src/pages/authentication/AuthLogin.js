@@ -61,8 +61,8 @@ const FirebaseLogin = ({ ...others }) => {
     var result = await authService.login(loginDto);
     if (result!=null)
     {
-      setNavigate(true);
       setIsAdmin(result.isAdmin)
+      setNavigate(true);
     } 
     setLoading(false);  
   };
