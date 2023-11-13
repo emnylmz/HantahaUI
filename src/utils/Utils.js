@@ -39,7 +39,8 @@ export const TabTitle = (newTitle) => {
 export function setTokenCookie(values) {
   Cookies.set('hanTaha-auth-token', values.token, { expires: 1/24 })
   Cookies.set('isAdmin', values.isAdmin, { expires: 1/24 })
-  Cookies.set('fullname', values.fullname, { expires: 1/24 })
+  Cookies.set('firstname', values.firstname, { expires: 1/24 })
+  Cookies.set('lastname', values.lastname, { expires: 1/24 })
   Cookies.set('username', values.username, { expires: 1/24 })
   Cookies.set('email', values.email, { expires: 1/24 })
 }
@@ -50,7 +51,8 @@ export function getCookie(cookieName) {
 export function clearCookies() {
   Cookies.remove('hanTaha-auth-token');
   Cookies.remove('isAdmin');
-  Cookies.remove('fullname');
+  Cookies.remove('firstname');
+  Cookies.remove('lastname');
   Cookies.remove('username');
   Cookies.remove('email');
 }

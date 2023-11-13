@@ -43,7 +43,8 @@ const ProfileSection = () => {
   const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
-  const [fullname, setFullname] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   /**
    * anchorRef is used on different componets and specifying one type leads to other components throwing an error
    * */
@@ -79,7 +80,8 @@ const ProfileSection = () => {
 
   const prevOpen = useRef(open);
   useEffect(() => {
-    setFullname(getCookie('fullname'))
+    setFirstname(getCookie('firstname'))
+    setLastname(getCookie('lastname'))
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -130,8 +132,8 @@ const ProfileSection = () => {
       color="inherit"
     >
       {/* burası firstname lastname gelmeli */}
-      {fullname.split(' ')[0].charAt(0)}
-    {fullname.split(' ').length > 1 ? fullname.split(' ')[1].charAt(0) : ''}
+      {firstname.charAt(0)}
+      {lastname.charAt(0)}
     </Avatar>
   }
   label={
@@ -176,7 +178,7 @@ const ProfileSection = () => {
                   <Box sx={{ paddingTop:2, paddingLeft:2,paddingRight:2}}>
                     <Stack>
                       <Stack direction="row" spacing={0.5} alignItems="center">
-                        <Typography variant="h4">{fullname}</Typography>
+                        <Typography variant="h4">{firstname}</Typography>
                       </Stack>
                       <Typography variant="subtitle2">Yönetici</Typography>
                     </Stack>
