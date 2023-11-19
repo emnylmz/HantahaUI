@@ -38,6 +38,24 @@ class UserService {
     const response = await get(END_POINTS.getAllUsers);
     return response;
   };
+
+  forgotPassword = async (email) => {
+    try {
+      const response = await post(END_POINTS.forgotPassword, email);
+      if (response.errors) 
+        showMultiLineError(response.errors);
+      else 
+      {
+        showSuccess('Şifre sıfırlama maili iletilmiştir.Lütfen spam kutunuzuda kontrol etmeyi unutmayınız.');
+      }
+      return response.data;
+    } catch (response) {
+      if (response.data && response.data.errors) {
+        showMultiLineError(response.data.errors);
+      }
+      return null;
+    }
+  };
 }
 
 export default UserService;

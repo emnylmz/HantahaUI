@@ -42,10 +42,10 @@ const FirebaseLogin = ({ ...others }) => {
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
 
-  const [showPassword, setShowPassword] = useState(false);
   const [navigate, setNavigate] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -95,7 +95,7 @@ const FirebaseLogin = ({ ...others }) => {
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string().email('E-posta geçersiz').max(255).required('E-posta noş bırakılamaz.'),
+          email: Yup.string().email('E-posta geçersiz').max(255).required('E-posta boş bırakılamaz.'),
           password: Yup.string().max(255).required('Şifre boş bırakılamaz.')
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -172,7 +172,7 @@ const FirebaseLogin = ({ ...others }) => {
                 }
                 label="Beni hatırla"
               />
-              <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
+              <Typography onClick={()=>window.location.href='/auth/forgotPassword'} variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
                 Şifremi Unuttum
               </Typography>
             </Stack>

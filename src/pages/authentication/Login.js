@@ -63,7 +63,7 @@ const Login = () => {
                           Merhaba, Tekrar Hoşgeldiniz
                           </Typography>
                           <Typography variant="caption" fontSize="16px" textAlign={matchDownSM ? 'center' : 'inherit'}>
-                            Devam etmek için bilgilerinizi girin
+                            Devam etmek için bilgilerinizi giriniz
                           </Typography>
                         </Stack>
                       </Grid>
