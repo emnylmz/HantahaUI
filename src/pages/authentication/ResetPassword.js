@@ -8,9 +8,8 @@ import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import Logo from 'components/admin/Logo';
 
 import PropTypes from 'prop-types';
-import { Box, FormControl, FormControlLabel, InputLabel, OutlinedInput, FormHelperText, Button,InputAdornment,IconButton, } from '@mui/material';
+import { Box, FormControl, InputLabel, OutlinedInput, FormHelperText, Button,InputAdornment,IconButton, } from '@mui/material';
 import MainCard from 'components/admin/cards/MainCard';
-import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import UserService from 'services/UserService';
 
@@ -30,10 +29,13 @@ const ForgotPassword = () => {
   TabTitle('Hantaha | Şifremi Sıfırla');
 
   let { resetToken } = useParams();
-  const [navigate, setNavigate] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  
+  const userService = new UserService();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -57,24 +59,48 @@ const ForgotPassword = () => {
     minHeight: '100vh'
   }));
 
-  let forgotPassword = async (email) => {
-    const userService = new UserService();
-    setLoading(true);
-    var result = await userService.forgotPassword(email);
-    //false dönerse lütfen mail kutunuzu kontrol edin diye bir sonuç dönsün ve süre dönsün
-    if (result != null) {
-      setNavigate(true);
-    }
-    setLoading(false);
+  let checkToken = async () => {
+    var result = await userService.checkToken({ Token: resetToken.trim() }); // Trim whitespace
+
+    if (result.toUpperCase() === "NOT_FOUND") { // Case-insensitive check
+        return false;
+    } 
+    return true;
+};
+
+// TODO burada yapı olmadı form yapısı düzeltilecek
+let resetPassword = async (password,repeatpassword) => {
+  setLoading(true);
+  var result = await userService.resetPassword({Password:password,RepeatPassword:repeatpassword,Token:resetToken});
+
+  if(result==true)
+  {
+    showAlert("Şifre başarıyla değiştirildi.Girişe yönlendiriliyorsunuz..")
+    setTimeout(function() {
+      window.location.href = '/auth/login';
+    }, 2000);
+  }
+    
+  setLoading(false);
+};
+
+useEffect(() => {
+  
+  setLoading(true);
+  const checkResetToken = async () => {
+      if (
+          checkVariableNullOrUndefined(resetToken) ||
+          checkStringVariableEmpty(resetToken) ||
+          !(await checkToken())
+      ) {
+          window.location.href = "/404";
+      }
   };
 
-  useEffect(() => {
-    if (checkVariableNullOrUndefined(resetToken) || checkStringVariableEmpty(resetToken))
-      showError('Lütfen tekrar şifre sıfırlama isteğinde bulununuz.');
-    else {
-      setLoading(false);
-    }
-  }, []);
+  checkResetToken();
+  setLoading(false);
+}, []);
+
   const AuthCardWrapper = ({ children, ...other }) => (
     <MainCard
       sx={{
@@ -122,7 +148,6 @@ const ForgotPassword = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <>
-                      {navigate ? <Navigate to="/auth/login" /> : <></>}
                       <Grid container direction="column" justifyContent="center" spacing={2}>
                         <Grid item xs={12}>
                           <Box
@@ -141,7 +166,6 @@ const ForgotPassword = () => {
                           submit: null
                         }}
                         validationSchema={Yup.object().shape({
-                          email: Yup.string().email('E-posta geçersiz').max(255).required('E-posta boş bırakılamaz.'),
                           password: Yup.string().max(255).required('Şifre boş bırakılamaz.'),
                           repassword: Yup.string()
                             .oneOf([Yup.ref('password'), null], 'Şifreler eşleşmiyor') // Burada kontrolü ekliyoruz
@@ -152,7 +176,7 @@ const ForgotPassword = () => {
                           try {
                             if (scriptedRef.current) {
                               setStatus({ success: true });
-                              forgotPassword({ email: values.email });
+                              resetPassword( values.password,values.repassword );
                             }
                           } catch (err) {
                             if (scriptedRef.current) {
@@ -174,10 +198,10 @@ const ForgotPassword = () => {
                               <OutlinedInput
                                 id="outlined-adornment-password-login"
                                 type={showPassword ? 'text' : 'password'}
-                                value={values.password}
+                                value={password}
                                 name="password"
                                 onBlur={handleBlur}
-                                onChange={handleChange}
+                                onChange={(e)=>setPassword(e.target.value)}
                                 endAdornment={
                                   <InputAdornment position="end">
                                     <IconButton
@@ -208,12 +232,12 @@ const ForgotPassword = () => {
                             >
                               <InputLabel htmlFor="outlined-adornment-repassword-login">Şifre Tekrar</InputLabel>
                               <OutlinedInput
-                                id="outlined-adornment-password-login"
+                                id="outlined-adornment-repassword-login"
                                 type={showRePassword ? 'text' : 'password'}
-                                value={values.repassword}
+                                value={rePassword}
                                 name="repassword"
                                 onBlur={handleBlur}
-                                onChange={handleChange}
+                                onChange={(e)=>setRePassword(e.target.value)}
                                 endAdornment={
                                   <InputAdornment position="end">
                                     <IconButton

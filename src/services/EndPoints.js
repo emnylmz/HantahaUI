@@ -9,6 +9,8 @@ const END_POINTS = {
   register: createEndpoint('/users/register'),
   updateUser: createEndpoint('/users/update'),
   forgotPassword: createEndpoint('/users/ForgotPassword'),
+  checkToken: createEndpoint('/users/CheckResetToken'),
+  resetPassword: createEndpoint('/users/ResetPassword'),
 
   //authentication
   login: createEndpoint('/authentication/Login'),

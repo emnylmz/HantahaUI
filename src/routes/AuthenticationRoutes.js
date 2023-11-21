@@ -28,7 +28,7 @@ const AuthenticationRoutes = {
     },
     {
       path: 'forgotPassword',
-      element: <ForgotPassword />
+      element: <ForgotPassword />,
     },
     {
       path: 'resetPassword/:resetToken',

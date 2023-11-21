@@ -8,7 +8,7 @@ import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import Logo from 'components/admin/Logo';
 
 import PropTypes from 'prop-types';
-import { Box, FormControl, FormControlLabel, InputLabel, OutlinedInput, FormHelperText, Button } from '@mui/material';
+import { Box, FormControl, InputLabel, OutlinedInput, FormHelperText, Button } from '@mui/material';
 import MainCard from 'components/admin/cards/MainCard';
 import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -25,7 +25,7 @@ import { TabTitle } from 'utils/utils';
 
 const ForgotPassword = () => {
   TabTitle('Hantaha | Şifremi Unuttum');
- 
+  const userService = new UserService();
 
   const [navigate, setNavigate] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,6 @@ const ForgotPassword = () => {
   }));
 
   let forgotPassword = async (email) => {
-    const userService = new UserService();
     setLoading(true);
     var result = await userService.forgotPassword(email);
     //false dönerse lütfen mail kutunuzu kontrol edin diye bir sonuç dönsün ve süre dönsün
