@@ -20,7 +20,6 @@ import { maxHeight, width } from '@mui/system';
 import { useEffect } from 'react';
 import { getCookie } from 'utils/utils';
 import SpeakerNotesOffIcon from '@mui/icons-material/SpeakerNotesOff';
-import { useRef } from 'react';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -36,7 +35,6 @@ const ExpandMore = styled((props) => {
 export default function WordCard({ verbItem }) {
   const [expanded, setExpanded] = React.useState(false);
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-  const expandMoreRef = useRef();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -90,19 +88,19 @@ export default function WordCard({ verbItem }) {
         )}
         {verbItem.sentences.length > 0 ? (
           <Tooltip title="Detayı Gör">
-            <ExpandMore ref={expandMoreRef} expand={expanded} onClick={handleExpandClick} aria-expanded={expanded}>
+            <ExpandMore  expand={expanded} onClick={handleExpandClick} aria-expanded={expanded}>
               <ExpandMoreIcon style={{width: "0.8em",height: "0.8em"}}  />
             </ExpandMore>
           </Tooltip>
         ) : (
           <Tooltip title="Girilmiş cümle yok">
-            <ExpandMore>
+            <ExpandMore >
               <SpeakerNotesOffIcon style={{width: "0.8em",height: "0.8em"}} />
             </ExpandMore>
           </Tooltip>
         )}
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse className="sentencesCard" in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Sentences:</Typography>
           {verbItem.sentences.map((sentence, index) => (

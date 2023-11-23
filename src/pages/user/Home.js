@@ -85,8 +85,8 @@ export default function Home() {
       {!loading ? (
         <>
         <Stack spacing={2}>
-            <Grid sx={4} style={{ marginTop: '10px' }} container direction="row" justifyContent="center" alignItems="center">
-              <Pagination size="small" disabled={paginationIsDisabled} count={pageCount} page={page} onChange={handleChange} />
+            <Grid  style={{ marginTop: '10px' }} container direction="row" justifyContent="center" alignItems="center">
+              <Pagination size="small" siblingCount={0} disabled={paginationIsDisabled} count={pageCount} page={page} onChange={handleChange} />
             </Grid>
           </Stack>
           <Grid style={{ marginTop: '5px' }} container direction="row" spacing={2}>
@@ -97,8 +97,8 @@ export default function Home() {
             ))}
           </Grid>
           <Stack spacing={2}>
-            <Grid sx={4} style={{ marginTop: '10px', marginBottom: '10px' }} container direction="row" justifyContent="center" alignItems="center">
-              <Pagination size="small" disabled={paginationIsDisabled} count={pageCount} page={page} onChange={handleChange} />
+            <Grid style={{ marginTop: '10px', marginBottom: '10px' }} container direction="row" justifyContent="center" alignItems="center">
+              <Pagination size="small" disabled={paginationIsDisabled} count={pageCount} siblingCount={0} page={page} onChange={handleChange} />
             </Grid>
           </Stack>
         </>

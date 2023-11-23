@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className="menu-icon" onClick={handleShowNavbar}>
           <Hamburger />
         </div>
-        <div className={`nav-elements`}>
+        <div className={`nav-elements ${showNavbar ? 'active' : ''}`}>
           <ul>
             <li>
               <NavLink to="/home" className={lastSection == "" || lastSection == 'home'?"active":""}>Anasayfa</NavLink>

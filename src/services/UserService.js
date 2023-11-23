@@ -59,7 +59,7 @@ class UserService {
 
   resetPassword = async (resetPasswordDto) => {
     try {
-      const response = await post(END_POINTS.forgotPassword, resetPasswordDto);
+      const response = await post(END_POINTS.resetPassword, resetPasswordDto);
       if (response.errors) 
         showMultiLineError(response.errors);
       else 

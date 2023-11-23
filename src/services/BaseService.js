@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_BASE_URL } from './EndPoints';
-import {getCookie, logOutErrorCodes, logOutTransactions, showAlert } from 'utils/utils';
+import {getCookie, logOutErrorCodes, logOutTransactions, showAlert, showError } from 'utils/utils';
 
 export async function get(endpoint) {
   const api = axios.create({
@@ -18,7 +18,7 @@ export async function get(endpoint) {
     if(logOutErrorCodes.includes(error.response.status))
       logOutTransactions();
     else if(error.response.status===500)
-    showAlert("Hata","Sorun sizde değil bizde. Sorun ile en yakın zamanda ilgileneceğiz.")
+    showError("Hata","Sorun sizde değil bizde. Sorun ile en yakın zamanda ilgileneceğiz.")
   }
 }
 

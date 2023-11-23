@@ -10,7 +10,7 @@ function Layout() {
 
   return (
     <div id="userLayout">
-      <Navbar></Navbar>
+      <Navbar/>
       <Grid style={{marginTop:"15px"}} container spacing={2}>
         <Grid item xs={2} />
         <Grid item xs={8}>

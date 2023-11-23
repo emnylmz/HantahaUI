@@ -83,6 +83,7 @@ body {
   .nav-elements.active {
     width: 270px;
     z-index: 1;
+    background-color: #CCD5AE;
   }
 
   .nav-elements ul {
@@ -94,4 +95,5 @@ body {
     margin-right: unset;
     margin-top: 22px;
   }
+  
 }
