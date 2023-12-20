@@ -47,19 +47,30 @@ const Navbar = () => {
             <li>
               <NavLink to="/home" className={lastSection == "" || lastSection == 'home'?"active":""}>Anasayfa</NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/contact"  className={lastSection == 'contact'?"active":""}>Bize Ulaşın</NavLink>
-            </li>
+            </li> */}
             {isAuthenticated ? (
               <li>
                 <ProfileSection/>
                 </li>
             ) : (
               <li>
-                <Button variant="outlined" href='/auth/login' startIcon={<AccountCircleIcon />}>
+                {/* <Button variant="outlined" href='/auth/login' startIcon={<AccountCircleIcon />}>
+                  Giriş Yap
+                </Button>&nbsp;
+                <Button className="loginButton"  variant="outlined" href='/auth/register' startIcon={<AccountCircleIcon />}>
+                  Kayıt Ol
+                </Button> */}
+                <Button className="loginButton" href='/auth/login'>
                   Giriş Yap
                 </Button>
+                <Button className="loginButton" href='/auth/register'>
+                  Kayıt Ol
+                </Button>
               </li>
+              
+              
             )}
           </ul>
         </div>

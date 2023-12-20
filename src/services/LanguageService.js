@@ -20,7 +20,7 @@ class LanguageService {
       else 
       {
         showSuccess(languageData.id===0?'Kayıt başarıyla oluşturuldu.':'Kayıt başarıyla güncellendi.');
-
+        return true;
       }
       
     } catch (response) {

@@ -47,67 +47,91 @@ export default function WordCard({ verbItem }) {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <ImageList className="flagCardRadius"
-  cols={4} // Set the number of columns to 4
-  gap={2} // Adjust the gap between images
-  sx={{
-    gridAutoFlow: "column",
-    gridTemplateColumns: "repeat(auto-fill, minmax(40px, 1fr)) !important",
-    justifyContent: 'space-between', // Equal space between items
-  }}
->
-  {verbItem.countryModel.map((country, index) => (
-    <ImageListItem key={index} sx={{ padding: 2 }}> {/* Adjust the padding value as needed */}
-      <img style={{ height: 30, width: 30, objectFit: 'cover' }} src={country.imageUrl} alt={country.englishName} title={country.englishName} />
-      {/* <ImageListItemBar title={country.englishName} /> */}
-    </ImageListItem>
-  ))}
-</ImageList>
+      <ImageList
+        className="flagCardRadius"
+        cols={4} // Set the number of columns to 4
+        gap={2} // Adjust the gap between images
+        sx={{
+          gridAutoFlow: 'column',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(40px, 1fr)) !important',
+          justifyContent: 'space-between' // Equal space between items
+        }}
+      >
+        {verbItem.countryModel.map((country, index) => (
+          <ImageListItem key={index} sx={{ padding: 2 }}>
+            {' '}
+            {/* Adjust the padding value as needed */}
+            <img
+              style={{ height: 30, width: 30, objectFit: 'cover' }}
+              src={country.imageUrl}
+              alt={country.englishName}
+              title={country.englishName}
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
       <CardContent className="wordCardColor">
         <Typography variant="subtitle1" color="text.secondary">
-          Dil:{verbItem.languageName}
+          <b>Language:</b> {verbItem.languageName}
         </Typography>
-        <Typography variant="subtitle2" color="text.secondary">
-          {verbItem.context}
+        <Typography variant="subtitle1" color="text.secondary">
+          <b>Verb:</b> {verbItem.context}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary">
+          <b>Turkish:</b>
+          {verbItem.turkishContext}
         </Typography>
       </CardContent>
       <CardActions disableSpacing className="wordCardRadius">
         {isAuthenticated && (
           <Tooltip title="Deftere Ekle">
             <IconButton>
-              <FavoriteIcon style={{width: "0.8em",height: "0.8em"}} />
+              <FavoriteIcon style={{ width: '0.8em', height: '0.8em' }} />
             </IconButton>
           </Tooltip>
         )}
         {isAuthenticated && (
           <Tooltip title="Paylaş">
-            <IconButton aria-label="share" >
-              <ShareIcon style={{width: "0.8em",height: "0.8em"}} />
+            <IconButton aria-label="share">
+              <ShareIcon style={{ width: '0.8em', height: '0.8em' }} />
             </IconButton>
           </Tooltip>
         )}
         {verbItem.sentences.length > 0 ? (
           <Tooltip title="Detayı Gör">
-            <ExpandMore  expand={expanded} onClick={handleExpandClick} aria-expanded={expanded}>
-              <ExpandMoreIcon style={{width: "0.8em",height: "0.8em"}}  />
+            <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded}>
+              <ExpandMoreIcon style={{ width: '0.8em', height: '0.8em' }} />
             </ExpandMore>
           </Tooltip>
         ) : (
           <Tooltip title="Girilmiş cümle yok">
-            <ExpandMore >
-              <SpeakerNotesOffIcon style={{width: "0.8em",height: "0.8em"}} />
+            <ExpandMore>
+              <SpeakerNotesOffIcon style={{ width: '0.8em', height: '0.8em' }} />
             </ExpandMore>
           </Tooltip>
         )}
       </CardActions>
       <Collapse className="sentencesCard" in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Sentences:</Typography>
+          <Typography paragraph>
+            <b>Sentences:</b>
+          </Typography>
           {verbItem.sentences.map((sentence, index) => (
-            <Typography key={index} paragraph>
-              <b>{sentence.languageName}:</b>{sentence.context}
-            </Typography>
-          ))}
+  <Typography key={index} paragraph>
+    <b style={{ display: 'flex', alignItems: 'center',flexWrap: 'wrap' }}>
+      {sentence.languageName}:
+      {sentence.countryModel.map((country, index) => (
+        <img key={index} style={{ height: 30, width: 30, marginLeft: 5 }} src={country.imageUrl} alt={country.name} />
+      ))}
+    </b>
+    {sentence.context.split('\n').map((line, i) => (
+      <span key={i}>
+        {i > 0 && <><br /><br /></>}
+        {i + 1}-){line}
+      </span>
+    ))}
+  </Typography>
+))}
         </CardContent>
       </Collapse>
     </Card>

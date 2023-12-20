@@ -119,10 +119,14 @@ const Language = () => {
       Id: language.id,
       IsActive: language.isActive,
       Name: language.name,
+      EnglishName: language.englishName,
       LanguageCountries:isNumberArray(language.languageCountries)===true?language.languageCountries:language.languageCountries.map(x=>x.id)
     };
     const result = await languageService.createOrUpdateLanguage(languageData);
-    if (result) await getLanguageList();
+    if (result) {
+      await getLanguageList();
+      setLanguage({});
+    }
     setLoading(false);
     setOpen(false);
   };
@@ -160,7 +164,7 @@ const Language = () => {
     <MainCard>
       <BackDrop loading={loading} />
       <Tooltip title="Dil Güncelle/Ekle">
-        <IconButton onClick={() => setOpen(true)} color="primary" aria-label="add şanguage">
+        <IconButton onClick={() => setOpen(true)} color="primary" aria-label="add anguage">
           <AddCircleIcon fontSize="medium" />
         </IconButton>
       </Tooltip>
@@ -196,6 +200,22 @@ const Language = () => {
                 }));
               }}
               label="Dil adı"
+            />
+            <TextField
+              style={{ marginBottom: '10px' }}
+              required
+              fullWidth
+              value={language.englishName}
+              inputProps={{
+                maxLength: 100
+              }}
+              onChange={(e) => {
+                setLanguage((p) => ({
+                  ...p,
+                  englishName: e.target.value
+                }));
+              }}
+              label="İngilizce Dil Adı"
             />
           <FormControlLabel
               control={

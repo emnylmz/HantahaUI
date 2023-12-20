@@ -57,7 +57,7 @@ export default function Home() {
 
   return (
     <Container>
-      Contact
+      Sayfa yapım aşamasındadır...
     </Container>
   );
 }

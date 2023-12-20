@@ -30,6 +30,17 @@ body {
   display: none;
 }
 
+.loginButton{
+  margin-left: 5px;
+  padding:7px;
+  background-color: #d4a373;
+  border-radius: 10px;
+}
+
+.loginButton:hover{
+  background-color: #faedcd;
+}
+
 .nav-elements {
 }
 
@@ -92,8 +103,11 @@ body {
   }
 
   .nav-elements ul li {
-    margin-right: unset;
-    margin-top: 22px;
+    margin-top: 5px;
+  }
+
+  .loginButton{
+    margin-top: 10px;
   }
   
 }
