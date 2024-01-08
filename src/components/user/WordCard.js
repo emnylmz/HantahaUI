@@ -12,14 +12,21 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChromeReaderModeIcon from '@mui/icons-material/ChromeReaderMode';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Grid, ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
-import { maxHeight, width } from '@mui/system';
+import { fontSize, fontWeight, maxHeight, width } from '@mui/system';
 import { useEffect } from 'react';
 import { getCookie } from 'utils/utils';
 import SpeakerNotesOffIcon from '@mui/icons-material/SpeakerNotesOff';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import Button from '@mui/material/Button';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -32,12 +39,25 @@ const ExpandMore = styled((props) => {
   })
 }));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default function WordCard({ verbItem }) {
   const [expanded, setExpanded] = React.useState(false);
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handlePopupClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handlePopupClose = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -47,6 +67,50 @@ export default function WordCard({ verbItem }) {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handlePopupClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>
+          <div style={{fontSize:"20px",fontWeight:"bold"}}>Verb: {verbItem.context}</div>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            <CardContent>
+              <Typography paragraph>
+                <b>Sentences:</b>
+              </Typography>
+              {verbItem.sentences.map((sentence, index) => (
+                <Typography key={index} paragraph>
+                  <b style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                    {sentence.languageName}:
+                    {sentence.countryModel.map((country, index) => (
+                      <img key={index} style={{ height: 30, width: 30, marginLeft: 5 }} src={country.imageUrl} alt={country.name} />
+                    ))}
+                  </b>
+                  {sentence.context.split('\n').map((line, i) => (
+                    <span key={i}>
+                      {i > 0 && (
+                        <>
+                          <br />
+                          <br />
+                        </>
+                      )}
+                      {i + 1}-){line}
+                    </span>
+                  ))}
+                </Typography>
+              ))}
+            </CardContent>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handlePopupClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
       <ImageList
         className="flagCardRadius"
         cols={4} // Set the number of columns to 4
@@ -99,8 +163,8 @@ export default function WordCard({ verbItem }) {
         )}
         {verbItem.sentences.length > 0 ? (
           <Tooltip title="Detayı Gör">
-            <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded}>
-              <ExpandMoreIcon style={{ width: '0.8em', height: '0.8em' }} />
+            <ExpandMore onClick={() => setOpen(true)}>
+              <ChromeReaderModeIcon style={{ width: '0.8em', height: '0.8em' }} />
             </ExpandMore>
           </Tooltip>
         ) : (
@@ -111,29 +175,7 @@ export default function WordCard({ verbItem }) {
           </Tooltip>
         )}
       </CardActions>
-      <Collapse className="sentencesCard" in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>
-            <b>Sentences:</b>
-          </Typography>
-          {verbItem.sentences.map((sentence, index) => (
-  <Typography key={index} paragraph>
-    <b style={{ display: 'flex', alignItems: 'center',flexWrap: 'wrap' }}>
-      {sentence.languageName}:
-      {sentence.countryModel.map((country, index) => (
-        <img key={index} style={{ height: 30, width: 30, marginLeft: 5 }} src={country.imageUrl} alt={country.name} />
-      ))}
-    </b>
-    {sentence.context.split('\n').map((line, i) => (
-      <span key={i}>
-        {i > 0 && <><br /><br /></>}
-        {i + 1}-){line}
-      </span>
-    ))}
-  </Typography>
-))}
-        </CardContent>
-      </Collapse>
+      <Collapse className="sentencesCard" in={expanded} timeout="auto" unmountOnExit></Collapse>
     </Card>
   );
 }

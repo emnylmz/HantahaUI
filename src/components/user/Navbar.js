@@ -45,7 +45,9 @@ const Navbar = () => {
         <div className={`nav-elements ${showNavbar ? 'active' : ''}`}>
           <ul>
             <li>
-              <NavLink to="/home" className={lastSection == "" || lastSection == 'home'?"active":""}>Anasayfa</NavLink>
+              <button className="navigationButton" onClick={()=>window.location.href="/home"} >
+                Anasayfa
+              </button>
             </li>
             {/* <li>
               <NavLink to="/contact"  className={lastSection == 'contact'?"active":""}>Bize Ulaşın</NavLink>

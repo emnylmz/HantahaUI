@@ -19,27 +19,86 @@ body {
 
 .navbar {
   height: 60px;
-  background-color: #CCD5AE;
+  background-color:#E8E8E4;
   position: relative;
 }
 
-.logo {
+.navigationButton {
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  padding-bottom: 10px;
+}
+
+.navigationButton::before {
+  margin-left: auto;
+}
+
+.navigationButton::after, .navigationButton::before {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  transition: 0.5s;
+}
+
+.navigationButton:hover::after, .navigationButton:hover::before {
+  width: 100%;
 }
 
 .menu-icon {
   display: none;
 }
 
-.loginButton{
-  margin-left: 5px;
-  padding:7px;
-  background-color: #d4a373;
+.loginButton {
+  background: none;
+  border: 2px solid #fff;
+  color: #131313;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  background-color: #FEC89A;
+  box-shadow: 0 2px 0 2px #000;
+  margin-left: 10px;
+  margin-top: 8px;
+  padding:2px;
   border-radius: 10px;
-}
-
-.loginButton:hover{
-  background-color: #faedcd;
-}
+ }
+ 
+ .loginButton:before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 120%;
+  background-color: #FAE1DD;
+  top: 50%;
+  transform: skewX(30deg) translate(-150%, -50%);
+  transition: all 0.5s;
+ }
+ 
+ .loginButton:hover {
+  background-color: #4cc9f0;
+  color: #fff;
+  box-shadow: 0 2px 0 2px #0d3b66;
+ }
+ 
+ .loginButton:hover::before {
+  transform: skewX(30deg) translate(150%, -50%);
+  transition-delay: 0.1s;
+ }
+ 
+ .loginButton:active {
+  transform: scale(0.9);
+ }
 
 .nav-elements {
 }
@@ -84,7 +143,7 @@ body {
     position: absolute;
     right: 0;
     top: 60px;
-    background-color: #CCD5AE;
+    background-color:#E8E8E4;
     width: 0px;
     height: calc(100vh - 60px);
     transition: all 0.3s ease-in;
@@ -94,7 +153,7 @@ body {
   .nav-elements.active {
     width: 270px;
     z-index: 1;
-    background-color: #CCD5AE;
+    background-color:#E8E8E4;
   }
 
   .nav-elements ul {
@@ -105,9 +164,4 @@ body {
   .nav-elements ul li {
     margin-top: 5px;
   }
-
-  .loginButton{
-    margin-top: 10px;
-  }
-  
 }
